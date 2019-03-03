@@ -591,13 +591,16 @@ declare class GlideRecord {
     /**
      * Runs the query against the table based on the filters specified by addQuery,
      * addEncodedQuery, etc.
+     * 
      * @param {Object} field The column name to query on.
      * @param {Object} value The value to query for.
      * @returns Method does not return a value
-     * @example var rec = new GlideRecord('incident');
+     * @example 
+     * 
+     * var rec = new GlideRecord('incident');
      * rec.query();
      * while (rec.next()) {
-     * gs.info(rec.number + ' exists');
+     *     gs.info(rec.number + ' exists');
      * }
      */
     query(field: any, value: any): void;
