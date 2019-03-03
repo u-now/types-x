@@ -464,7 +464,7 @@ declare class GlideRecord {
    * gs.info(encodedQuery);
    */
   getEncodedQuery(): void;
-  ``
+  
   /**
    * Returns the field's label.
    *
