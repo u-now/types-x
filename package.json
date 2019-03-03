@@ -1,5 +1,5 @@
 {
-  "name": "types-servicenow-london",
+  "name": "types-x",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/johncaruso/types-servicenow-london.git"
+    "url": "git+https://github.com/johncaruso/types-x.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/johncaruso/types-servicenow-london/issues"
+    "url": "https://github.com/johncaruso/types-x/issues"
   },
-  "homepage": "https://github.com/johncaruso/types-servicenow-london#readme",
+  "homepage": "https://github.com/johncaruso/types-x#readme",
   "devDependencies": {
     "eslint": "^5.15.0",
     "prettier": "^1.16.4"
