@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/johncaruso/types-servicenow-london/issues"
   },
-  "homepage": "https://github.com/johncaruso/types-servicenow-london#readme"
+  "homepage": "https://github.com/johncaruso/types-servicenow-london#readme",
+  "devDependencies": {
+    "eslint": "^5.15.0",
+    "prettier": "^1.16.4"
+  }
 }
