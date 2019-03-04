@@ -114,8 +114,8 @@ declare class GlideRecord {
   ): GlideQueryCondition;
 
   /**
-   * A filter that specifies records where the value of the field passed in the parameter is
-   * not null.
+   * A filter that specifies records where the value of the field passed in the parameter is not
+   * null.
    *
    * @param fieldName The name of the field to be checked.
    * @returns A filter that specifies records where the value of the field passed in the
@@ -133,8 +133,7 @@ declare class GlideRecord {
   addNotNullQuery(fieldName: string): GlideQueryCondition;
 
   /**
-   * Adds a filter to return records where the value of the specified field is
-   * null.
+   * Adds a filter to return records where the value of the specified field is null.
    *
    * @param fieldName The name of the field to be checked.
    * @returns The query condition added to the GlideRecord.
@@ -168,7 +167,7 @@ declare class GlideRecord {
    *   rec.update();
    * }
    */
-  addQuery(name: string, value: object | string | number): GlideQueryCondition;
+  addQuery(name: string, value: any): GlideQueryCondition;
 
   /**
    * Provides the ability to build a request, which when executed, returns the rows from the
@@ -176,25 +175,32 @@ declare class GlideRecord {
    *
    * @param name Table field name.
    * @param operator Query operator. The available values are dependent on the data type of the
-   * value parameter.Numbers:
-   * =
-   * !=
-   * &gt;
-   * &gt;=
-   * &lt;
-   * &lt;=
-   * Strings (must be in upper case):
-   * =
-   * !=
-   * IN
-   * NOT IN
-   * STARTSWITH
-   * ENDSWITH
-   * CONTAINS
-   * DOES NOT CONTAIN
-   * INSTANCEOF
+   * value parameter.
    *
-   * @param {Object} value Value on which to query (not case-sensitive).
+   * Numbers:
+   * - =
+   * - !=
+   * - &gt;
+   * - &gt;=
+   * - &lt;
+   * - &lt;=
+   *
+   * Strings (must be in upper case):
+   * - =
+   * - !=
+   * - IN
+   * - NOT IN
+   * - STARTSWITH
+   * - ENDSWITH
+   * - CONTAINS
+   *   - 'short_descriptionLIKEemail' encoded query evaluates to
+   *   - 'short_descriptionCONTAINSemail'
+   * - DOES NOT CONTAIN
+   *   - 'short_descriptionNOT LIKEemail' encoded query evaluates to
+   *   - 'short_descriptionDOES NOT CONTAINemail'
+   * - INSTANCEOF
+   *
+   * @param value Value on which to query (not case-sensitive).
    * @returns The query condition that was added to the GlideRecord.
    * @example
    *
@@ -217,14 +223,11 @@ declare class GlideRecord {
    *   //do something....
    * }
    */
-  addQuery(
-    name: string,
-    operator: QueryOperator,
-    value: object | string | number
-  ): GlideQueryCondition;
+  addQuery(name: string, operator: QueryOperator, value: any): GlideQueryCondition;
 
   /**
    * Adds a filter to return records using an encoded query string.
+   *
    * @param query An encoded query string
    * @returns The query condition added to the GlideRecord.
    * @example
@@ -463,8 +466,8 @@ declare class GlideRecord {
    * var encodedQuery = gr.getEncodedQuery();
    * gs.info(encodedQuery);
    */
-  getEncodedQuery(): void;
-  
+  getEncodedQuery(): string;
+
   /**
    * Returns the field's label.
    *
@@ -726,7 +729,7 @@ declare class GlideRecord {
    *   gs.info(rec.number + ' exists');
    * }
    */
-  next(): void;
+  next(): boolean;
 
   /**
    * Retrieves the current operation being performed, such as insert, update, or delete.
@@ -775,12 +778,15 @@ declare class GlideRecord {
   orderByDesc(name: any): void;
 
   /**
-   * Runs the query against the table based on the filters specified by addQuery,
-   * addEncodedQuery, etc.
+   * Runs the query against the table based on the filters specified by addQuery, addEncodedQuery,
+   * etc.
    *
-   * @param {Object} field The column name to query on.
-   * @param {Object} value The value to query for.
-   * @returns Method does not return a value
+   * This queries the GlideRecord table as well as any references of the table. Usually this is
+   * performed without arguments. If name/value pair is specified, "name=value" condition is added
+   * to the query.
+   *
+   * @param field The column name to query on.
+   * @param value The value to query for.
    * @example
    *
    * var rec = new GlideRecord('incident');
@@ -789,7 +795,7 @@ declare class GlideRecord {
    *   gs.info(rec.number + ' exists');
    * }
    */
-  query(field: any, value: any): void;
+  query(field?: string, value?: any): void;
 
   /**
    * Sets a flag to indicate if the next database action (insert, update, delete) is to be
@@ -897,7 +903,7 @@ declare class GlideRecord {
    * gr.update();
    * gs.info(gr.getElement('short_description'));
    */
-  update(reason: any): void;
+  update(reason?: string): string;
 
   /**
    * Updates each GlideRecord in the list with any changes that have been made.
@@ -927,14 +933,14 @@ declare class GlideRecord {
    *   gs.print(rec.number + ' exists');
    * }
    */
-  _next(): void;
+  _next(): boolean;
 
   /**
    * Identical to query(). This method is intended to be used on tables where there is a column
    * named query, which would interfere with using the query() method.
    *
-   * @param {Object} name Column name on which to query
-   * @param {Object} value Value for which to query
+   * @param name Column name on which to query
+   * @param value Value for which to query
    * @returns Method does not return a value
    * @example
    *
@@ -944,7 +950,7 @@ declare class GlideRecord {
    *   gs.print(rec.number + ' exists');
    * }
    */
-  _query(name: any, value: any): void;
+  _query(name?: string, value?: any): void;
 }
 
 declare class GlideQueryCondition {
@@ -1008,18 +1014,20 @@ declare class GlideQueryCondition {
    * - =
    * - !=
    * - IN
+   * - NOT IN
    * - STARTSWITH
    * - ENDSWITH
    * - CONTAINS
-   * - DOESNOTCONTAIN
+   *   - 'short_descriptionLIKEemail' encoded query evaluates to
+   *   - 'short_descriptionCONTAINSemail'
+   * - DOES NOT CONTAIN
+   *   - 'short_descriptionNOT LIKEemail' encoded query evaluates to
+   *   - 'short_descriptionDOES NOT CONTAINemail'
+   * - INSTANCEOF
    * @param value The value to query on.
    * @returns A reference to a GlideQueryConditon that was added to the GlideRecord.
    */
-  addOrCondition(
-    name: string,
-    oper: QueryOperator,
-    value: object | string | number
-  ): GlideQueryCondition;
+  addOrCondition(name: string, oper: QueryOperator, value: any): GlideQueryCondition;
 }
 
 type QueryOperator =
@@ -1030,10 +1038,11 @@ type QueryOperator =
   | '<'
   | '<='
   | 'IN'
+  | 'NOT IN'
   | 'STARTSWITH'
   | 'ENDSWITH'
   | 'CONTAINS'
-  | 'DOESNOTCONTAIN'
+  | 'DOES NOT CONTAIN'
   | 'INSTANCEOF';
 
 declare class GlideDBFunctionBuilder {
