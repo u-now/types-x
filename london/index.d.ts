@@ -5,5 +5,3 @@
 /// <reference path="./GlideSchedule.d.ts" />
 /// <reference path="./GlideSystem.d.ts" />
 /// <reference path="./GlideTime.d.ts.d.ts" />
-
-declare const gs: sn.GlideSystem;

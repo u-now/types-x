@@ -193,11 +193,7 @@ declare class GlideRecord {
    * - STARTSWITH
    * - ENDSWITH
    * - CONTAINS
-   *   - 'short_descriptionLIKEemail' encoded query evaluates to
-   *   - 'short_descriptionCONTAINSemail'
    * - DOES NOT CONTAIN
-   *   - 'short_descriptionNOT LIKEemail' encoded query evaluates to
-   *   - 'short_descriptionDOES NOT CONTAINemail'
    * - INSTANCEOF
    *
    * @param value Value on which to query (not case-sensitive).
@@ -312,9 +308,9 @@ declare class GlideRecord {
   chooseWindow(firstRow: number, lastRow: number, forceCount?: boolean): void;
 
   /**
-   * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT for a duration
-   * field. Does not require the creation of a GlideDateTime object because the duration field is
-   * already a GlideDateTime object.
+   * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT for a duration field.
+   * Does not require the creation of a GlideDateTime object because the duration field is already a
+   * GlideDateTime object.
    *
    * @returns Number of milliseconds since January 1, 1970, 00:00:00 GMT.
    * @example
@@ -323,12 +319,11 @@ declare class GlideRecord {
    * inc.get('17c90efb13418700cc36b1422244b05d');
    * gs.info(inc.calendar_duration.dateNumericValue());
    */
-  dateNumericValue(): void;
+  dateNumericValue(): number;
 
   /**
    * Deletes multiple records that satisfy the query condition.
    *
-   * @returns Method does not return a value
    * @example
    *
    * var gr = new GlideRecord('incident')
@@ -349,13 +344,14 @@ declare class GlideRecord {
    * gr.next();
    * gr.deleteRecord();
    */
-  deleteRecord(): void;
+  deleteRecord(): boolean;
 
   /**
    * Defines a GlideRecord based on the specified expression of 'name = value'.
    *
-   * @param {Object} name Column name to match (if two arguments are specified), or sys_id (if one is specified)
-   * @param {Object} [value] Value to match. If value is not specified, then the expression used is
+   * @param name Column name to match (if two arguments are specified), or sys_id (if one is 
+   * specified)
+   * @param [value] Value to match. If value is not specified, then the expression used is
    * 'sys_id = name'.
    * @returns True if one or more matching records was found. False if no matches
    * found.
@@ -365,12 +361,12 @@ declare class GlideRecord {
    * gr.get('99ebb4156fa831005be8883e6b3ee4b9');
    * gs.info(gr.number);
    */
-  get(name: any, value: any): void;
+  get(name: string, value?: string): boolean;
 
   /**
    * Returns the dictionary attributes for the specified field.
    *
-   * @param {String} fieldName Field name for which to return the dictionary attributes
+   * @param fieldName Field name for which to return the dictionary attributes
    * @returns Dictionary attributes
    * @example
    *
@@ -384,14 +380,14 @@ declare class GlideRecord {
    *   }
    * }
    */
-  getAttribute(fieldName: any): void;
+  getAttribute(fieldName: string): string;
 
   /**
    * Returns the table's label.
    *
    * @returns Table's label
    */
-  getClassDisplayValue(): void;
+  getClassDisplayValue(): string;
 
   /**
    * Retrieves the display value for the current record.
@@ -403,7 +399,7 @@ declare class GlideRecord {
    * gr.get('sys_id','ef43c6d40a0a0b5700c77f9bf387afe3');
    * gs.info(gr.getDisplayValue());
    */
-  getDisplayValue(): void;
+  getDisplayValue(field?: string): string;
 
   /**
    * Returns the element's descriptor.
@@ -435,12 +431,12 @@ declare class GlideRecord {
    * }
    * answer;
    */
-  getED(): void;
+  getED(): GlideElementDescriptor;
 
   /**
    * Retrieves the GlideElement object for the specified field.
    *
-   * @param {String} columnName Name of the column to get the element from.
+   * @param columnName Name of the column to get the element from.
    * @returns The GlideElement for the specified column of the current record.
    * @example
    *
@@ -451,7 +447,7 @@ declare class GlideRecord {
    * gr.insert();
    * gs.info(gr.getElement('short_description'));
    */
-  getElement(columnName: any): void;
+  getElement(columnName: string): GlideElement;
 
   /**
    * Retrieves the query condition of the current result set as an encoded query string.
@@ -497,7 +493,7 @@ declare class GlideRecord {
    *   }
    * }
    */
-  getLabel(): void;
+  getLabel(): string;
 
   /**
    * Retrieves the last error message. If there is no last error message, null is returned.
@@ -511,12 +507,12 @@ declare class GlideRecord {
    * var errormessage = gr.getLastErrorMessage();
    * gs.info(errormessage);
    */
-  getLastErrorMessage(): void;
+  getLastErrorMessage(): string;
 
   /**
    * Retrieves a link to the current record.
    *
-   * @param {Boolean} [noStack] If true, the sysparm_stack parameter is not appended to the link.
+   * @param noStack If true, the sysparm_stack parameter is not appended to the link.
    * The parameter sysparm_stack specifies the page to visit after closing the current link.
    * @returns A link to the current record as a string.
    * @example
@@ -528,7 +524,7 @@ declare class GlideRecord {
    * gr.next()
    * gs.info(gs.getProperty('glide.servlet.uri') + gr.getLink(false));
    */
-  getLink(noStack: any): void;
+  getLink(noStack: boolean): string;
 
   /**
    * Retrieves the class name for the current record.
@@ -540,7 +536,7 @@ declare class GlideRecord {
    * var recordClassName = gr.getRecordClassName();
    * gs.info(recordClassName);
    */
-  getRecordClassName(): void;
+  getRecordClassName(): string;
 
   /**
    * Retrieves the number of rows in the query result.
@@ -552,7 +548,7 @@ declare class GlideRecord {
    * gr.query();
    * gs.info("Records in incident table: " + gr.getRowCount());
    */
-  getRowCount(): void;
+  getRowCount(): number;
 
   /**
    * Retrieves the name of the table associated with the GlideRecord.
@@ -563,7 +559,7 @@ declare class GlideRecord {
    * var gr = new GlideRecord('incident');
    * gs.info(gr.getTableName());
    */
-  getTableName(): void;
+  getTableName(): string;
 
   /**
    * Gets the primary key of the record, which is usually the sys_id unless otherwise
@@ -578,12 +574,12 @@ declare class GlideRecord {
    * var uniqueid = gr.getUniqueValue();
    * gs.info(uniqueid);
    */
-  getUniqueValue(): void;
+  getUniqueValue(): string;
 
   /**
    * Retrieves the string value of an underlying element in a field.
    *
-   * @param {String} name The name of the field to get the value from.
+   * @param name The name of the field to get the value from.
    * @returns The value of the field.
    * @example
    *
@@ -593,7 +589,7 @@ declare class GlideRecord {
    * gr.next() ;
    * gs.info(gr.getValue('number'));
    */
-  getValue(name: any): void;
+  getValue(name: string): string;
 
   /**
    * Determines if there are any more records in the GlideRecord object.
@@ -607,12 +603,11 @@ declare class GlideRecord {
    * gs.info("Table is not empty");
    * }
    */
-  hasNext(): void;
+  hasNext(): boolean;
 
   /**
    * Creates an empty record suitable for population before an insert.
    *
-   * @returns Method does not return a value
    * @example
    *
    * var gr = new GlideRecord('incident');
@@ -635,7 +630,7 @@ declare class GlideRecord {
    * gr.description = 'Incident description';
    * gr.insert();
    */
-  insert(): void;
+  insert(): string;
 
   /**
    * Checks to see if the current database action is to be aborted.
@@ -646,11 +641,10 @@ declare class GlideRecord {
    * var gr = new GlideRecord('incident');
    * gs.info(gr.isActionAborted());
    */
-  isActionAborted(): void;
+  isActionAborted(): boolean;
 
   /**
-   * Checks if the current record is a new record that has not yet been inserted into the
-   * database.
+   * Checks if the current record is a new record that has not yet been inserted into the database.
    *
    * @returns True if the record is new and has not been inserted into the database.
    * @example
@@ -659,13 +653,13 @@ declare class GlideRecord {
    * gr.newRecord(); // create a new record and populate it with default values
    * gs.info(gr.isNewRecord());
    */
-  isNewRecord(): void;
+  isNewRecord(): boolean;
 
   /**
    * Determines if the table exists.
    *
-   * @returns True if table is valid or if record was successfully retrieved. False if table
-   * is invalid or record was not successfully retrieved.
+   * @returns True if table is valid or if record was successfully retrieved. False if table is
+   * invalid or record was not successfully retrieved.
    * @example
    *
    * var gr = new GlideRecord('incident');
@@ -673,12 +667,12 @@ declare class GlideRecord {
    * var anotherGr = new GlideRecord('wrong_table_name');
    * gs.info(anotherGr.isValid());
    */
-  isValid(): void;
+  isValid(): boolean;
 
   /**
    * Determines if the specified field is defined in the current table.
    *
-   * @param {String} columnName The name of the the field.
+   * @param columnName The name of the the field.
    * @returns True if the field is defined for the current table.
    * @example
    *
@@ -686,7 +680,7 @@ declare class GlideRecord {
    * gr.initialize();
    * gs.info(gr.isValidField("short_description"));
    */
-  isValidField(columnName: any): void;
+  isValidField(columnName: string): boolean;
 
   /**
    * Determines if current record is a valid record.
@@ -701,13 +695,12 @@ declare class GlideRecord {
    * }
    * gs.info(rec.isValidRecord());
    */
-  isValidRecord(): void;
+  isValidRecord(): boolean;
 
   /**
-   * Creates a new GlideRecord record, sets the default values for the fields, and assigns a
-   * unique ID to the record.
+   * Creates a new GlideRecord record, sets the default values for the fields, and assigns a unique
+   * ID to the record.
    *
-   * @returns Method does not return a value
    * @example
    *
    * var gr = new GlideRecord("x_app_table");
@@ -719,8 +712,8 @@ declare class GlideRecord {
   /**
    * Moves to the next record in the GlideRecord object.
    *
-   * @returns True if moving to the next record is successful. False if there are no more
-   * records in the result set.
+   * @returns True if moving to the next record is successful. False if there are no more records in
+   * the result set.
    * @example
    *
    * var rec = new GlideRecord('incident');
@@ -740,14 +733,14 @@ declare class GlideRecord {
    * //Commonly used in a business rule, returns insert if the current operation is insert
    * gs.info("current operation " + current.operation());
    */
-  operation(): void;
+  operation(): GlideRecordOperation;
 
   /**
    * Specifies an orderBy column.
    *
-   * @param {String} name The column name used to order the records in this GlideRecord object.
-   * @returns Method does not return a value
+   * @param name The column name used to order the records in this GlideRecord object.
    * @example
+   *
    * var queryString = "priority=2";
    * var gr = new GlideRecord('incident');
    * gr.orderBy('short_description'); // Ascending Order
@@ -757,13 +750,12 @@ declare class GlideRecord {
    *   gs.info(gr.short_description);
    * }
    */
-  orderBy(name: any): void;
+  orderBy(name: string): void;
 
   /**
    * Specifies a decending orderBy column.
    *
-   * @param {String} name The column name to be used to order the records in a GlideRecord object.
-   * @returns Method does not return a value
+   * @param name The column name to be used to order the records in a GlideRecord object.
    * @example
    *
    * var queryString = "priority=2";
@@ -775,7 +767,7 @@ declare class GlideRecord {
    *   gs.info(gr.short_description);
    * }
    */
-  orderByDesc(name: any): void;
+  orderByDesc(name: string): void;
 
   /**
    * Runs the query against the table based on the filters specified by addQuery, addEncodedQuery,
@@ -798,11 +790,10 @@ declare class GlideRecord {
   query(field?: string, value?: any): void;
 
   /**
-   * Sets a flag to indicate if the next database action (insert, update, delete) is to be
-   * aborted. This is often used in business rules.
+   * Sets a flag to indicate if the next database action (insert, update, delete) is to be aborted.
+   * This is often used in business rules.
    *
-   * @param {Boolean} b True to abort the next action. False if the action is to be allowed.
-   * @returns Method does not return a value
+   * @param b True to abort the next action. False if the action is to be allowed.
    * @example
    *
    * // Often used in business rule to check whether the current operation should be aborted.
@@ -810,15 +801,14 @@ declare class GlideRecord {
    *   current.setAbortAction(true);
    * }
    */
-  setAbortAction(b: any): void;
+  setAbortAction(b: boolean): void;
 
   /**
-   * Sets the duration field to a number of milliseconds since January 1, 1970, 00:00:00 GMT
-   * for a duration field. Does not require the creation of a GlideDateTime object because the
-   * duration field is already a GlideDateTime object.
+   * Sets the duration field to a number of milliseconds since January 1, 1970, 00:00:00 GMT for a
+   * duration field. Does not require the creation of a GlideDateTime object because the duration
+   * field is already a GlideDateTime object.
    *
-   * @param {Number} milliseconds Number of milliseconds spanned by the duration.
-   * @returns Method does not return a value
+   * @param milliseconds Number of milliseconds spanned by the duration.
    * @example
    *
    * var inc = new GlideRecord('incident');
@@ -828,13 +818,12 @@ declare class GlideRecord {
    * inc.calendar_duration.setDateNumericValue(timems)
    * gs.info(inc.calendar_duration.getValue());
    */
-  setDateNumericValue(milliseconds: any): void;
+  setDateNumericValue(milliseconds: number): void;
 
   /**
    * Sets the limit for number of records are fetched by the GlideRecord query.
    *
-   * @param {Number} maxNumRecords The maximum number of records to fetch.
-   * @returns Method does not return a value
+   * @param maxNumRecords The maximum number of records to fetch.
    * @example
    *
    * var gr = new GlideRecord('incident');
@@ -842,13 +831,12 @@ declare class GlideRecord {
    * gr.setLimit(10);
    * gr.query(); // this retrieves latest 10 incident records created
    */
-  setLimit(maxNumRecords: any): void;
+  setLimit(maxNumRecords: number): void;
 
   /**
    * Sets sys_id value for the current record.
    *
-   * @param {String} guid The GUID to be assigned to the current record.
-   * @returns Method does not return a value
+   * @param guid The GUID to be assigned to the current record.
    * @example
    *
    * var gr = new GlideRecord('incident');
@@ -857,14 +845,13 @@ declare class GlideRecord {
    * gr.insert();
    * gs.info(gr.sys_id);
    */
-  setNewGuidValue(guid: any): void;
+  setNewGuidValue(guid: string): void;
 
   /**
    * Sets the value of the field with the specified name to the specified value.
    *
-   * @param {String} name Name of the field.
-   * @param {Object} value The value to assign to the field.
-   * @returns Method does not return a value
+   * @param name Name of the field.
+   * @param value The value to assign to the field.
    * @example
    *
    * var elementName = 'short_description';
@@ -873,25 +860,24 @@ declare class GlideRecord {
    * gr.setValue(elementName, "My DB is not working");
    * gr.insert();
    */
-  setValue(name: any, value: any): void;
+  setValue(name: string, value: any): void;
 
   /**
    * Enables or disables the running of business rules, script engines, and audit.
    *
-   * @param {Boolean} enable If true (default), enables business rules. If false, disables business
+   * @param enable If true (default), enables business rules. If false, disables business
    * rules.
-   * @returns Method does not return a value
    * @example
    *
    * //Enable business rules, scripts engines for x_app_table
    * var gr = new GlideRecord("x_app_table");
    * gr.setWorkflow(true);
    */
-  setWorkflow(enable: any): void;
+  setWorkflow(enable: boolean): void;
 
   /**
-   * Updates the GlideRecord with any changes that have been made. If the record does not
-   * already exist, it is inserted.
+   * Updates the GlideRecord with any changes that have been made. If the record does not already
+   * exist, it is inserted.
    *
    * @param [reason] The reason for the update. The reason is displayed in the audit record.
    * @returns Unique ID of the new or updated record. Returns null if the update fails.
@@ -908,7 +894,6 @@ declare class GlideRecord {
   /**
    * Updates each GlideRecord in the list with any changes that have been made.
    *
-   * @returns Method does not return a value
    * @example
    *
    * // update the state of all active incidents to 4 - "Awaiting User Info"
@@ -941,7 +926,6 @@ declare class GlideRecord {
    *
    * @param name Column name on which to query
    * @param value Value for which to query
-   * @returns Method does not return a value
    * @example
    *
    * var rec = new GlideRecord('sys_app_module');
@@ -1018,11 +1002,7 @@ declare class GlideQueryCondition {
    * - STARTSWITH
    * - ENDSWITH
    * - CONTAINS
-   *   - 'short_descriptionLIKEemail' encoded query evaluates to
-   *   - 'short_descriptionCONTAINSemail'
    * - DOES NOT CONTAIN
-   *   - 'short_descriptionNOT LIKEemail' encoded query evaluates to
-   *   - 'short_descriptionDOES NOT CONTAINemail'
    * - INSTANCEOF
    * @param value The value to query on.
    * @returns A reference to a GlideQueryConditon that was added to the GlideRecord.
@@ -1117,4 +1097,40 @@ declare class GlideDBFunctionBuilder {
   datediff(): void;
 
   // TODO add remainder
+}
+
+interface GlideElement {
+  canCreate(): boolean;
+  canRead(): boolean;
+  canWrite(): boolean;
+  changes(): boolean;
+  changesFrom(value: object): boolean;
+  changesTo(value: object): boolean;
+  getAttribute(attributeName: string): string;
+  getChoices(name?: string): any[];
+  getDecryptedValue(): string;
+  getDisplayValue(maxCharacters?: number): string;
+  getED(): GlideElementDescriptor;
+  getReferenceTable(): string;
+  getRefRecord(): GlideRecord;
+  nil(): boolean;
+  setDisplayValue(value: object): void;
+  setError(value: string): void;
+  setValue(value: object | string): void;
+  toString(): string;
+}
+
+interface GlideElementDescriptor {
+  getAttachmentEncryptionType(): string;
+  getEncryptionType(): string;
+  getInternalType(): string;
+  getLabel(): string;
+  getLength(): number;
+  getName(): string;
+  getPlural(): boolean;
+  hasAttachmentsEncrypted(): boolean;
+  isAutoOrSysID(): boolean;
+  isChoiceTable(): boolean;
+  isEdgeEncrypted(): boolean;
+  isVirtual(): boolean;
 }
