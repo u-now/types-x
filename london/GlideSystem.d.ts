@@ -65,7 +65,7 @@ interface GlideSystem {
   getUserNameByUserID(id: string): string;
   hasRole(roleName: string): boolean;
   include(include: string): void;
-  info(message: string, parm1?: any, parm2?: any, parm3?: any, parm4?: any, parm5?: any): void;
+  info(message: any, parm1?: any, parm2?: any, parm3?: any, parm4?: any, parm5?: any): void;
   isDebugging(): boolean;
   isInteractive(): boolean;
   isLoggedIn(): boolean;
