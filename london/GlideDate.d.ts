@@ -20,7 +20,7 @@ declare class GlideDate {
    * var gd = new GlideDate();
    * gd.setValue('2015-01-01');
    * gs.info(gd.getByFormat("dd-MM-yyyy"));
-   * // Output: 01-01-2015
+   * // 01-01-2015
    */
   getByFormat(format: string): string;
 
@@ -34,7 +34,7 @@ declare class GlideDate {
    * //Today's date is 2016-05-13
    * var gd =new GlideDate();
    * gs.info(gd.getDayOfMonthNoTZ());
-   * // Output: 13
+   * // 13
    */
   getDayOfMonthNoTZ(): number;
 
@@ -49,7 +49,7 @@ declare class GlideDate {
    * var gd =new GlideDate();
    * gd.setValue('2015-01-01');
    * gs.info(gd.getDisplayValue());
-   * // Output: 2015-01-01
+   * // 2015-01-01
    */
 
   getDisplayValue(): string;
@@ -63,7 +63,7 @@ declare class GlideDate {
    *
    * var gd =new GlideDate();
    * gs.info(gd.getDisplayValueInternal());
-   * // Output: 2014-10-22
+   * // 2014-10-22
    */
   getDisplayValueInternal(): string;
 
@@ -76,7 +76,7 @@ declare class GlideDate {
    * //Today's date is 2016-05-13
    * var gd =new GlideDate();
    * gs.info(gd.getMonthNoTZ());
-   * // Output: 5
+   * // 5
    */
   getMonthNoTZ(): number;
 
@@ -90,7 +90,7 @@ declare class GlideDate {
    * var gd =new GlideDate();
    * gd.setValue('2015-01-01');
    * gs.info(gd.getValue());
-   * // Output: 2015-01-01
+   * // 2015-01-01
    */
   getValue(): string;
 
@@ -103,7 +103,7 @@ declare class GlideDate {
    * //Today's date is 2016-05-13
    * var gd =new GlideDate();
    * gs.info(gd.getYearNoTZ());
-   * // Output: 5
+   * // 5
    */
   getYearNoTZ(): number;
 
@@ -118,7 +118,7 @@ declare class GlideDate {
    * var gd =new GlideDate();
    * gd.setDisplayValue("2011-01-01");
    * gs.info(gd.getValue());
-   * // Output: 2011-01-01
+   * // 2011-01-01
    */
   setDisplayValue(asDisplayed: string): void;
 
@@ -150,7 +150,7 @@ declare class GlideDate {
    * sgd2.setDisplayValue('2014-07-19');
    * duration= GlideDate.subtract(sgd1, sgd2);
    * gs.info(duration.getDisplayValue());
-   * // Output: 1 Day
+   * // 1 Day
    */
   subtract(start: GlideDate, end: GlideDate): GlideDuration;
 }
