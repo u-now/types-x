@@ -349,7 +349,7 @@ declare class GlideRecord {
   /**
    * Defines a GlideRecord based on the specified expression of 'name = value'.
    *
-   * @param name Column name to match (if two arguments are specified), or sys_id (if one is 
+   * @param name Column name to match (if two arguments are specified), or sys_id (if one is
    * specified)
    * @param [value] Value to match. If value is not specified, then the expression used is
    * 'sys_id = name'.
@@ -1099,9 +1099,31 @@ declare class GlideDBFunctionBuilder {
   // TODO add remainder
 }
 
+/**
+ * The Scoped GlideElement API provides a number of convenient script methods for dealing
+ * with fields and their values. Scoped GlideElement methods are available for the fields of the
+ * current GlideRecord.
+ * @class GlideElement
+ * @typedef {Object}  GlideElement
+ */
 interface GlideElement {
+  /**
+   * Determines if the user's role permits the creation of new records in this
+   * field.ServiceNow
+   * @returns True if the field can be created, false otherwise.
+   */
   canCreate(): boolean;
+  /**
+   * Indicates whether the user's role permits them to read the associated
+   * GlideRecord.
+   * @returns True if the field can be read, false otherwise.
+   */
   canRead(): boolean;
+  /**
+   * Determines whether the user's role permits them to write to the associated
+   * GlideRecord.
+   * @returns True if the user can write to the field, false otherwise.
+   */
   canWrite(): boolean;
   changes(): boolean;
   changesFrom(value: object): boolean;
