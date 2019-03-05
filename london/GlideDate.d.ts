@@ -19,7 +19,7 @@ declare class GlideDate {
    *
    * var gd = new GlideDate();
    * gd.setValue('2015-01-01');
-   * gs.info(gd.getByFormat("dd-MM-yyyy"));
+   * gs.info(gd.getByFormat('dd-MM-yyyy'));
    * // 01-01-2015
    */
   getByFormat(format: string): string;
@@ -31,8 +31,8 @@ declare class GlideDate {
    * @returns The day of the month in the UTC time zone, from 1 to 31.
    * @example
    *
-   * //Today's date is 2016-05-13
-   * var gd =new GlideDate();
+   * // Today's date is 2016-05-13
+   * var gd = new GlideDate('2016-05-13');
    * gs.info(gd.getDayOfMonthNoTZ());
    * // 13
    */
@@ -46,7 +46,7 @@ declare class GlideDate {
    * formats for different users.
    * @example
    *
-   * var gd =new GlideDate();
+   * var gd = new GlideDate();
    * gd.setValue('2015-01-01');
    * gs.info(gd.getDisplayValue());
    * // 2015-01-01
@@ -61,7 +61,7 @@ declare class GlideDate {
    * the internal time format of yyyy-MM-dd.
    * @example
    *
-   * var gd =new GlideDate();
+   * var gd = new GlideDate();
    * gs.info(gd.getDisplayValueInternal());
    * // 2014-10-22
    */
@@ -73,8 +73,8 @@ declare class GlideDate {
    *
    * @example
    *
-   * //Today's date is 2016-05-13
-   * var gd =new GlideDate();
+   * // Today's date is 2016-05-13
+   * var gd = new GlideDate();
    * gs.info(gd.getMonthNoTZ());
    * // 5
    */
@@ -87,7 +87,7 @@ declare class GlideDate {
    * @returns The date value in the internal format and system time zone.
    * @example
    *
-   * var gd =new GlideDate();
+   * var gd = new GlideDate();
    * gd.setValue('2015-01-01');
    * gs.info(gd.getValue());
    * // 2015-01-01
@@ -100,8 +100,8 @@ declare class GlideDate {
    * @returns The numerical value of the year.
    * @example
    *
-   * //Today's date is 2016-05-13
-   * var gd =new GlideDate();
+   * // Today's date is 2016-05-13
+   * var gd = new GlideDate();
    * gs.info(gd.getYearNoTZ());
    * // 5
    */
@@ -115,8 +115,8 @@ declare class GlideDate {
    * @returns Method does not return a value
    * @example
    *
-   * var gd =new GlideDate();
-   * gd.setDisplayValue("2011-01-01");
+   * var gd = new GlideDate();
+   * gd.setDisplayValue('2011-01-01');
    * gs.info(gd.getValue());
    * // 2011-01-01
    */
@@ -132,7 +132,7 @@ declare class GlideDate {
    * var gd = new GlideDate();
    * gd.setValue('2015-01-01');
    * gs.info(gd.getValue());
-   * // Outout: 2015-01-01
+   * // 2015-01-01
    */
   setValue(o: string): void;
 
@@ -148,9 +148,9 @@ declare class GlideDate {
    * sgd1.setDisplayValue('2014-07-18');
    * var sgd2 = new GlideDate();
    * sgd2.setDisplayValue('2014-07-19');
-   * duration= GlideDate.subtract(sgd1, sgd2);
+   * var duration = GlideDate.subtract(sgd1, sgd2);
    * gs.info(duration.getDisplayValue());
    * // 1 Day
    */
-  subtract(start: GlideDate, end: GlideDate): GlideDuration;
+  static subtract(start: GlideDate, end: GlideDate): GlideDuration;
 }
