@@ -1,3 +1,3 @@
 # types-x
 
-## eXtend your ServiceNow development environment with type definitions
+## eXtend ServiceNow development with type definitions
