@@ -14,7 +14,7 @@
 
 ### Contribute pull request
 - Create a feature branch (TODO: create and link branch naming guidelines?)
-  `git checkout -b ${branch_name}`
+  - `git checkout -b ${branch_name}`
 - Make your changes (edit existing files or create new ones)
 - Commit the changes (TODO: create and link "commit message guidelines")
   - `git commit --all -m "${commit_message}"`
