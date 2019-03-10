@@ -1476,7 +1476,23 @@ interface GlideElement {
   toString(): string;
 }
 
+/**
+ * The scoped GlideElementDescriptor API provides information about individual
+ * fields.
+ */
 interface GlideElementDescriptor {
+  /**
+   * Returns the encryption type used for attachments on the element's table.
+   * @returns The encryption type used on attachments. Returns null if attachments on the
+   * element's table are not being encrypted.
+   * @example var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * var isEdge = ed.getAttachmentEncryptionType();
+   * gs.info(isEdge);
+   *
+   */
   getAttachmentEncryptionType(): string;
   getEncryptionType(): string;
   getInternalType(): string;
