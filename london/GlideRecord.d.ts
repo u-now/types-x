@@ -1476,6 +1476,10 @@ interface GlideElement {
   toString(): string;
 }
 
+/**
+ * The scoped GlideElementDescriptor API provides information about individual
+ * fields.
+ */
 interface GlideElementDescriptor {
   getAttachmentEncryptionType(): string;
   getEncryptionType(): string;
