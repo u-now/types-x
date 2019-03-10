@@ -1476,11 +1476,73 @@ interface GlideElement {
   toString(): string;
 }
 
+/**
+ * The scoped GlideElementDescriptor API provides information about individual fields.
+ */
 interface GlideElementDescriptor {
+  /**
+   * Returns the encryption type used for attachments on the element's table.
+   * @returns The encryption type used on attachments. Returns null if attachments on the
+   * element's table are not being encrypted.
+   * 
+   * @example 
+   * 
+  * var grInc = new GlideRecord('incident');
+  * grInc.query('priority', '1');
+  * var field = grInc.getElement('priority');
+  * var ed = field.getED();
+  * var isEdge = ed.getAttachmentEncryptionType();
+  * gs.info(isEdge);
+   *
+   */
   getAttachmentEncryptionType(): string;
+  /**
+   * Returns the element's encryption type.
+   * 
+   * @returns The element's encryption type. Returns null if the element is not encrypted.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * sEdge = ed.getEncryptionType();
+   * gs.info(isEdge);
+   */
   getEncryptionType(): string;
+  /**
+   * Returns the element's internal data type.
+   * @returns The element's internal data type.
+   * @example var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * var isEdge = ed.getInternalType();
+   * gs.info(isEdge);
+   */
   getInternalType(): string;
+  /**
+   * Returns the element's label.
+   * @returns The element's label.
+   * @example var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * var isEdge = ed.getLabel();
+   * gs.info(isEdge);
+   */
   getLabel(): string;
+  /**
+   * Returns the element's length.
+   * @returns The element's size.
+   * @example var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * var isEdge = ed.getLength();
+   * gs.info(isEdge);
+   */
+
   getLength(): number;
   getName(): string;
   getPlural(): boolean;
