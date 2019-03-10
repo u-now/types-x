@@ -9,7 +9,7 @@
 - Fork `types-x` repo 
   - TODO: add details, images
 - Clone your fork locally  
-  `git clone https://github.com/${your_username}/types-x.git && cd types-x`
+  - `git clone https://github.com/${your_username}/types-x.git && cd types-x`
 - Run `npm install` to install development packages
 
 ### Contribute pull request
