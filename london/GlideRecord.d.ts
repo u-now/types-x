@@ -1008,21 +1008,6 @@ declare interface GlideQueryCondition {
   addOrCondition(name: string, oper: QueryOperator, value: any): GlideQueryCondition;
 }
 
-type QueryOperator =
-  | '='
-  | '!='
-  | '>'
-  | '>='
-  | '<'
-  | '<='
-  | 'IN'
-  | 'NOT IN'
-  | 'STARTSWITH'
-  | 'ENDSWITH'
-  | 'CONTAINS'
-  | 'DOES NOT CONTAIN'
-  | 'INSTANCEOF';
-
 declare class GlideDBFunctionBuilder {
   /**
    * Instantiates a GlideDBFunctionBuilder object.
@@ -1506,3 +1491,20 @@ interface GlideElementDescriptor {
   isEdgeEncrypted(): boolean;
   isVirtual(): boolean;
 }
+
+type QueryOperator =
+  | '='
+  | '!='
+  | '>'
+  | '>='
+  | '<'
+  | '<='
+  | 'IN'
+  | 'NOT IN'
+  | 'STARTSWITH'
+  | 'ENDSWITH'
+  | 'CONTAINS'
+  | 'DOES NOT CONTAIN'
+  | 'INSTANCEOF';
+
+type GlideRecordOperation = 'insert' | 'update' | 'delete';
