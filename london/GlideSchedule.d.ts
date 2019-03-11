@@ -55,7 +55,8 @@ declare class GlideSchedule {
    * var startDate = new GlideDateTime('2014-10-16 02:00:00');
    * var endDate = new GlideDateTime('2014-10-18 04:00:00');
    * var schedule = new GlideSchedule();
-   * schedule.load('090eecae0a0a0b260077e1dfa71da828'); // loads "8-5 weekdays excluding holidays" schedule
+   * // loads "8-5 weekdays excluding holidays" schedule
+   * schedule.load('090eecae0a0a0b260077e1dfa71da828');
    * var duration = schedule.duration(startDate, endDate);
    * gs.info(duration.getDurationValue()); // gets the elapsed time in schedule
    */
