@@ -1,6 +1,5 @@
 /**
- * The scoped GlideDuration class provides methods for working with spans of time or
- * durations.
+ * The scoped GlideDuration class provides methods for working with spans of time or durations.
  *
  * GlideDuration objects store the duration as a date and time from January 1, 1970, 00:00:00.
  * As a result, setValue() and getValue() use the scoped GlideDateTime object for parameters and
@@ -96,8 +95,8 @@ declare class GlideDuration {
   getDurationValue(): string;
 
   /**
-   * Gets the rounded number of days. If the time part is more than 12 hours, the return
-   * value is rounded up. Otherwise, it is rounded down.
+   * Gets the rounded number of days. If the time part is more than 12 hours, the return value is 
+   * rounded up. Otherwise, it is rounded down.
    *
    * @returns The day part, rounded.
    * @example
@@ -138,11 +137,11 @@ declare class GlideDuration {
    *
    * @param o The duration in the object's internal format, which is the date and time from
    * January 1, 1970, 00:00:00.
-   * @returns Method does not return a value
    * @example
    *
    * var dur = new GlideDuration();
-   * dur.setValue('1970-01-05 08:00:00'); // sets internal DateTime value. The String will be parsed into a GlideDateTime object.
+   * // Sets internal DateTime value. The String will be parsed into a GlideDateTime object.
+   * dur.setValue('1970-01-05 08:00:00'); 
    * gs.info(dur.getDisplayValue());
    */
   setValue(o: object): void;
@@ -150,8 +149,8 @@ declare class GlideDuration {
   /**
    * Subtracts the specified duration from the current duration.
    *
-   * @param {GlideDuration} duration The duration to subtract.
-   * @returns Method does not return a value
+   * @param duration The duration to subtract.
+   * @returns GlideDuration of the difference.
    * @example
    *
    * var duration = new GlideDuration('3 12:00:00');
