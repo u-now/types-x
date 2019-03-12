@@ -8,6 +8,8 @@ declare class GlideRecord {
   readonly sys_mod_count: number & GlideElement;
   readonly sys_updated_by: string & GlideElement;
   readonly sys_updated_on: GlideDateTime & GlideElement;
+  variables: object;
+  [fieldName: string]: GlideElement;
 
   /**
    * Creates an instance of the GlideRecord class for the specified table.
@@ -1194,49 +1196,58 @@ interface GlideElement {
    *
    * To get the value as a string, use `getAttribute(string)`.
    *
-   * @param {String} attributeName Attribute name
+   * @param attributeName Attribute name
    * @returns Boolean value of the attribute. Returns false if the attribute does not exist.
    */
   getBooleanAttribute(attributeName: string): boolean;
 
-  //
-  // TODO: 2019-03-10 JCC continue updating JSDocs below
-  //
-
   /**
    * Generates a choice list for a field.
-   * @param dependent Optional: a dependent value
+   *
+   * @param [dependent] Optional: a dependent value
    * @returns An array list of choices.
-   * @example var glideRecord = new GlideRecord('incident');
-   * glideRecord.query('priority','1');
+   * @example
+   *
+   * var glideRecord = new GlideRecord('incident');
+   * glideRecord.query('priority', '1');
    * glideRecord.next();
+   *
    * // urgency has choice list: 1 - High, 2 - Medium, 3 - Low, with value: 1, 2, 3
    * var choices = glideRecord.urgency.getChoices();
    * gs.info(choices);
    */
-  getChoices(name?: string): any[];
+  getChoices(dependent?: string): any[];
 
   /**
    * Returns the choice label for the current choice.
+   *
    * @returns The selected choice's label.
-   * @example var glideRecord = new GlideRecord('incident');
-   * glideRecord.query('priority','1');
+   * @example
+   *
+   * var glideRecord = new GlideRecord('incident');
+   * glideRecord.query('priority', '1');
    * glideRecord.next();
+   *
    * // urgency has choice list: 1 - High, 2 - Medium, 3 - Low, with value: 1, 2, 3
    * var choiceLabel = glideRecord.urgency.getChoiceValue();
    * gs.info(choiceLabel);
+   * // 1 - High
    */
   getChoiceValue(): string;
 
   /**
    * Returns the clear text value for Password (2 way encrypted) fields in scoped
    * applications.
+   *
    * @returns The clear text password.
-   * @example var tablename = 'x_scoped_app_table'
+   * @example
+   *
+   * var tablename = 'x_scoped_app_table'
    * var CI = new GlideRecord(tablename);
    * CI.addQuery('number', '0001002');
    * CI.query();
    * CI.next();
+   *
    * var password = CI.password_field
    * var decrypted = password.getDecryptedValue();
    * gs.info(decrypted);
@@ -1245,10 +1256,13 @@ interface GlideElement {
 
   /**
    * Gets the formatted display value of the field.
-   * @param maxCharacters Optional: Maximum characters desired
+   *
+   * @param [maxCharacters] Optional: Maximum characters desired
    * @returns The display value of the field
-   * @example var glideRecord = new GlideRecord('incident');
-   * glideRecord.query('priority','1');
+   * @example
+   *
+   * var glideRecord = new GlideRecord('incident');
+   * glideRecord.query('priority', '1');
    * glideRecord.next();
    * gs.info(glideRecord.priority.getDisplayValue());
    */
@@ -1256,9 +1270,13 @@ interface GlideElement {
 
   /**
    * Returns the field's element descriptor.
+   *
    * @returns The field's element descriptor.
-   * @example var grInc = new GlideRecord('incident');
+   * @example
+   *
+   * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
    */
@@ -1266,126 +1284,164 @@ interface GlideElement {
 
   /**
    * Returns the phone number in international format.
+   *
    * @returns The phone number in international format.
    */
   getGlobalDisplayValue(): any;
 
   /**
    * Returns the HTML value of a field.
-   * @param maxChars Optional. Maximum number of characters to return.
+   *
+   * @param [maxChars] Optional. Maximum number of characters to return.
    * @returns HTML value for the field.
-   * @example var inccause = new GlideRecord("incident");
+   * @example
+   *
+   * var inccause = new GlideRecord('incident');
    * inccause.short_description = current.short_description;
    * inccause.comments = current.comments.getHTMLValue();
    * inccause.insert();
    */
-  getHTMLValue(maxChars: number): string;
+  getHTMLValue(maxChars?: number): string;
 
   /**
    * Returns either the most recent journal entry or all journal entries.
+   *
    * @param mostRecent If 1, returns the most recent entry. If -1, returns all journal
    * entries.
    * @returns For the most recent entry, returns a string that contains the field label,
    * timestamp, and user display name of the journal entry.
+   *
    * For all journal entries, returns the same information for all journal entries
    * ever entered as a single string with each entry delimited by "\n\n".
-   * @example //gets all journal entries as a string where each entry is delimited by '\n\n'
+   * @example
+   *
+   * //gets all journal entries as a string where each entry is delimited by '\n\n'
    * var notes = current.work_notes.getJournalEntry(-1);
    * //stores each entry into an array of strings
-   * var na = notes.split("\n\n");
-   * for (var i = 0; i &lt; na.length; i++)
-   * gs.print(na[i]);
+   * var na = notes.split('\n\n');
+   *
+   * for (var i = 0; i < na.length; i++)
+   *   gs.print(na[i]);
    */
   getJournalEntry(mostRecent: number): string;
 
   /**
    * Returns the object label.
+   *
    * @returns Object label
-   * @example var gr = new GlideRecord("sc_req_item");
-   * gr.addQuery("request", current.sysapproval);
+   * @example
+   *
+   * var gr = new GlideRecord('sc_req_item');
+   * gr.addQuery('request', current.sysapproval);
    * gr.query();
-   * while(gr.next()) {
-   * var nicePrice = gr.price.toString();
-   * if (nicePrice != ) {
-   * nicePrice = parseFloat(nicePrice);
-   * nicePrice = nicePrice.toFixed(2);
-   * }
-   * template.print(gr.number + ":  " + gr.quantity + " X " + gr.cat_item.getDisplayValue() + " at $" + nicePrice + " each \n");
-   * template.print("    Options:\n");
-   * for (key in gr.variables) {
-   * var v = gr.variables[key];
-   * if(v.getGlideObject().getQuestion().getLabel() != ) {
-   * template.space(4);
-   * template.print('     ' +  v.getGlideObject().getQuestion().getLabel() + " = " + v.getDisplayValue() + "\n");
-   * }
-   * }
+   * while (gr.next()) {
+   *   var nicePrice = gr.price.toString();
+   *   if (nicePrice != '') {
+   *     nicePrice = parseFloat(nicePrice);
+   *     nicePrice = nicePrice.toFixed(2);
+   *   }
+   *   template.print(
+   *     gr.number + ':  ' + gr.quantity + ' X ' + gr.cat_item.getDisplayValue() +
+   *     ' at $' + nicePrice + ' each \n'
+   *   );
+   *   template.print('    Options:\n');
+   *   for (var key in gr.variables) {
+   *     var v = gr.variables[key];
+   *     if (v.getGlideObject().getQuestion().getLabel() != '' ) {
+   *       template.space(4);
+   *       template.print(
+   *         '     ' + v.getGlideObject().getQuestion().getLabel() + ' = ' +
+   *         v.getDisplayValue() + '\n'
+   *       );
+   *     }
+   *   }
    * }
    */
   getLabel(): string;
 
   /**
    * Returns the name of the field.
+   *
    * @returns Field name
    */
   getName(): string;
 
   /**
    * Gets the table name for a reference element.
+   *
    * @returns The table name of the reference
-   * @example var grINC = new GlideRecord('incident');
-   * grINC.query('number','INC0010041'); // record assignment group assigned to "CAB Approval"
+   * @example
+   *
+   * var grINC = new GlideRecord('incident');
+   * grINC.query('number', 'INC0010041'); // record assignment group assigned to "CAB Approval"
    * if (grINC.next()) {
-   * // Get the table name
-   * var tableName = grINC.assignment_group.getReferenceTable();
-   * gs.info( tableName );
+   *   // Get the table name
+   *   var tableName = grINC.assignment_group.getReferenceTable();
+   *   gs.info(tableName);
    * }
    */
   getReferenceTable(): string;
 
   /**
    * Returns a GlideRecord object for a given reference element.
+   *
    * @returns A GlideRecord object
    * @example
+   *
    * var grINC = new GlideRecord('incident');
    * grINC.notNullQuery('caller_id');
    * grINC.query();
    * if (grINC.next()) {
-   * // Get a GlideRecord object for the referenced sys_user record
-   * var grUSER = grINC.caller_id.getRefRecord();
-   * if (grUSER.isValidRecord())
-   * gs.print( grUSER.getValue('name') );
+   *
+   *   // Get a GlideRecord object for the referenced sys_user record
+   *   var grUSER = grINC.caller_id.getRefRecord();
+   *   if (grUSER.isValidRecord())
+   *     gs.print( grUSER.getValue('name') );
    * }
    */
   getRefRecord(): GlideRecord;
 
   /**
    * Returns the name of the table on which the field resides.
+   *
    * @returns Name of the table. The returned value may be different from the table Class
    * that the record is in. See Tables and Classes in the product documentation.
-   * @example if (current.approver.getTableName() == "sysapproval_approver") {
-   * if (current.approver == email.from_sys_id)  {
-   * current.comments = "reply from: " + email.from + "\n\n" + email.body_text;
-   * // if it's been cancelled, it's cancelled.
-   * var doit = true;
-   * if (current.state=='cancelled')
-   * doit = false;
-   * if (email.body.state != undefined)
-   * current.state= email.body.state;
-   * if (doit)
-   * current.update();
-   * } else {
-   * gs.log("Approval for task ("+current.sysapproval.getDisplayValue()+") rejected because user sending
-   * email( "+email.from+") does not match the approver ("+current.approver.getDisplayValue()+")");
-   * }
+   * @example
+   *
+   * if (current.approver.getTableName() == 'sysapproval_approver') {
+   *   if (current.approver == email.from_sys_id) {
+   *     current.comments = 'reply from: ' + email.from + '\n\n' + email.body_text;
+   *
+   *     // if it's been cancelled, it's cancelled.
+   *     var doit = true;
+   *     if (current.state == 'cancelled') doit = false;
+   *
+   *     if (email.body.state != undefined) current.state = email.body.state;
+   *
+   *     if (doit) current.update();
+   *   } else {
+   *     gs.log(
+   *       'Approval for task (' +
+   *         current.sysapproval.getDisplayValue() +
+   *         ') rejected because user sending email (' +
+   *         email.from +
+   *         ') does not match the approver (' +
+   *         current.approver.getDisplayValue() +
+   *         ')'
+   *     );
+   *   }
    * }
    */
   getTableName(): string;
 
   /**
    * Determines if a field is null.
+   *
    * @returns True if the field is null or an empty string, false if not.
-   * @example var glideRecord = new GlideRecord('incident');
-   * glideRecord.query('priority','1');
+   * @example
+   *
+   * var glideRecord = new GlideRecord('incident');
+   * glideRecord.query('priority', '1');
    * glideRecord.next();
    * gs.info(glideRecord.state.nil());
    */
@@ -1394,9 +1450,11 @@ interface GlideElement {
   /**
    * Sets the value of a date/time element to the specified number of milliseconds since
    * January 1, 1970 00:00:00 GMT.
+   *
    * @param milliseconds Number of milliseconds since 1/1/1970
-   * @returns Method does not return a value
-   * @example var gr = new GlideRecord("incident");
+   * @example
+   *
+   * var gr = new GlideRecord('incident');
    * gr.initialize();
    * gr.opened_at.setDateNumericValue(10000);
    */
@@ -1404,11 +1462,14 @@ interface GlideElement {
 
   /**
    * Sets the display value of the field.
+   *
    * @param value The value to set for the field.
-   * @returns Method does not return a value
-   * @example var glideRecord = new GlideRecord('incident');
-   * glideRecord.query('priority','1');
+   * @example
+   *
+   * var glideRecord = new GlideRecord('incident');
+   * glideRecord.query('priority', '1');
    * glideRecord.next();
+   *
    * //change the urgency to 3
    * glideRecord.urgency.setDisplayValue('3 - Low');
    * gs.info(glideRecord.urgency);
@@ -1417,17 +1478,21 @@ interface GlideElement {
 
   /**
    * Adds an error message. Available in Fuji patch 3.
+   *
    * @param errorMessage The error message.
    * @returns Method does not return a value
-   * @example var glideRecord = new GlideRecord('incident');
-   * glideRecord.query('priority','1');
+   * @example
+   *
+   * var glideRecord = new GlideRecord('incident');
+   * glideRecord.query('priority', '1');
    * glideRecord.next();
    * glideRecord.short_description.setError('Error text');
    */
-  setError(value: string): void;
+  setError(errorMessage: string): void;
 
   /**
    * Sets the field to the specified phone number.
+   *
    * @param phoneNumber The phone number to set. This can be in either the international or local
    * format.
    * @param strict When true, specifies that the number specified must match the correct format.
@@ -1439,22 +1504,28 @@ interface GlideElement {
 
   /**
    * Sets the value of a field.
+   *
    * @param value Object value to set the field to.
    * @returns Method does not return a value
-   * @example var glideRecord = new GlideRecord('incident');
-   * glideRecord.query('priority','1');
+   * @example
+   *
+   * var glideRecord = new GlideRecord('incident');
+   * glideRecord.query('priority', '1');
    * glideRecord.next();
    * glideRecord.short_description.setValue('Network failure');
    * gs.info(glideRecord.short_description);
    */
-  setValue(value: object | string): void;
+  setValue(value: any): void;
 
   /**
    * Converts the value to a string.
+   *
    * @param value Object value to set the field to.
    * @returns The value as a string
-   * @example var glideRecord = new GlideRecord('incident');
-   * glideRecord.query('priority','1');
+   * @example
+   *
+   * var glideRecord = new GlideRecord('incident');
+   * glideRecord.query('priority', '1');
    * glideRecord.next();
    * gs.info(glideRecord.opened_at.toString());
    */
@@ -1462,33 +1533,228 @@ interface GlideElement {
 }
 
 /**
- * The scoped GlideElementDescriptor API provides information about individual
- * fields.
+ * The scoped GlideElementDescriptor API provides information about individual fields.
+ *
+ * There is no constructor for this class. Use the GlideElement `getED()` method to obtain a
+ * GlideElementDescriptor object.
  */
 interface GlideElementDescriptor {
   /**
    * Returns the encryption type used for attachments on the element's table.
-   * @returns The encryption type used on attachments. Returns null if attachments on the
-   * element's table are not being encrypted.
-   * @example var grInc = new GlideRecord('incident');
+   *
+   * @returns The encryption type used on attachments. Returns null if attachments on the element's
+   * table are not being encrypted.
+   * @example
+   *
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   *
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   *
+   * var isEdge = ed.getAttachmentEncryptionType();
+   * gs.info(isEdge);
+   * // null
+   */
+  getAttachmentEncryptionType(): string;
+
+  /**
+   * Returns the element's encryption type.
+   * 
+   * @returns The element's encryption type. Returns null if the element is not
+   * encrypted.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * sEdge = ed.getEncryptionType();
+   * gs.info(isEdge);
+   * // null
+   */
+  getEncryptionType(): string;
+
+  /**
+   * Returns the element's internal data type.
+   * 
+   * @returns The element's internal data type.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * var isEdge = ed.getInternalType();
+   * gs.info(isEdge);
+   */
+  getInternalType(): string;
+
+  /**
+   * Returns the element's label.
+   * 
+   * @returns The element's label.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * var isEdge = ed.getLabel();
+   * gs.info(isEdge);
+   * // Priority
+   */
+  getLabel(): string;
+
+  /**
+   * Returns the element's length.
+   * 
+   * @returns The element's size.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * var isEdge = ed.getLength();
+   * gs.info(isEdge);
+   * // 40
+   */
+  getLength(): number;
+
+  /**
+   * Returns the element's name.
+   * 
+   * @returns The element's name.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * var isEdge = ed.getName();
+   * gs.info(isEdge);
+   * // priority
+   */
+  getName(): string;
+
+  /**
+   * Returns the element's plural label.
+   * 
+   * @returns The element's plural label.
+   * @example 
+   * 
+   * var gr = new GlideRecord('incident');
+   * gr.query();
+   * var ed = gr.getED();
+   * gs.info(ed.getPlural());
+   * // Incidents
+   */
+  getPlural(): boolean;
+
+  /**
+   * Returns true if an encrypted attachment has been added to the table.
+   * 
+   * @returns Returns true if an encrypted attachment has been added to the table.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * var isEdge = ed.hasAttachmentsEncrypted();
+   * gs.info(isEdge);
+   * // false
+   */
+  hasAttachmentsEncrypted(): boolean;
+
+  /**
+   * Returns true if the element is an automatically generated or system field.
+   * 
+   * @returns True if the element is automatically generated or a system field.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * var isEdge = ed.getAttachmentEncryptionType();
+   * 
+   * isEdge = ed.isAutoOrSysID();
    * gs.info(isEdge);
-   *
+   * // false
    */
-  getAttachmentEncryptionType(): string;
-  getEncryptionType(): string;
-  getInternalType(): string;
-  getLabel(): string;
-  getLength(): number;
-  getName(): string;
-  getPlural(): boolean;
-  hasAttachmentsEncrypted(): boolean;
   isAutoOrSysID(): boolean;
+
+  /**
+   * Returns true if the element is defined as a dropdown choice in its dictionary
+   * definition.
+   * 
+   * @returns Returns true if the element is defined as a dropdown choice. Returns true even
+   * if there are no entries defined in the choice table. The last choice type,
+   * suggestion, does not return true.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * var isChoiceTable = ed.isChoiceTable();
+   * gs.info(isChoiceTable);
+   * // true
+   */
   isChoiceTable(): boolean;
+
+  /**
+   * Returns true if an element is encrypted.
+   * 
+   * @returns Returns true if the element is encrypted, false otherwise.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * var isEdge = ed.isEdgeEncrypted();
+   * gs.info(isEdge)
+   * // false
+   */
   isEdgeEncrypted(): boolean;
+
+  /**
+   * Returns true if the element is a virtual element.
+   * 
+   * A virtual element is a calculated field as set by the dictionary definition of the field.
+   * Virtual fields cannot be encrypted.
+   * 
+   * @returns Returns true if the element is a virtual element.
+   * @example 
+   * 
+   * var grInc = new GlideRecord('incident');
+   * grInc.query('priority', '1');
+   * 
+   * var field = grInc.getElement('priority');
+   * var ed = field.getED();
+   * 
+   * var isVirtual = ed.isVirtual();
+   * gs.info(isVirtual);
+   * // false
+   */
   isVirtual(): boolean;
 }
 
