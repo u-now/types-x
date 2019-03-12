@@ -1,3 +1,4 @@
+/// <reference path="./Class.d.ts" />
 /// <reference path="./GlideDate.d.ts" />
 /// <reference path="./GlideDateTime.d.ts" />
 /// <reference path="./GlideDuration.d.ts" />
