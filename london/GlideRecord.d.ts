@@ -1049,6 +1049,7 @@ declare class GlideDBFunctionBuilder {
 
   /**
    * Concatenates the values of two or more fields.
+   * Use the `field(String field)` method to define fields on which the operation is performed.
    *
    * @example
    *
@@ -1061,27 +1062,142 @@ declare class GlideDBFunctionBuilder {
   concat(): void;
 
   /**
-   * Defines a constant value to use in the function. If used with the dayofweek() method, the string defines whether
-   * to use Sunday or Monday as the first day of the week.
+   * Defines a constant value to use in the function. If used with the `dayofweek()` method, the 
+   * string defines whether to use Sunday or Monday as the first day of the week.
    *
-   * When used with the dayofweek() method, the value defines whether the week starts on a Sunday or Monday.
+   * @param constant A constant value used in a function.
+   * 
+   * When used with the `dayofweek()` method, the value defines whether the week starts on a Sunday or
+   * Monday.
+   * 
    * - 1: Week begins on Sunday.
    * - 2: Week begins on Monday.
    *
-   * This definition enables the dayofweek() method to return the correct day of the week from a given date. If a
-   * value other than 1 or 2 is provided, the dayofweek() method uses Sunday as the first day of the week.
-   *
-   * @param constant A constant value used in a function.
+   * This definition enables the `dayofweek()` method to return the correct day of the week from a 
+   * given date. If a value other than 1 or 2 is provided, the `dayofweek()` method uses Sunday as 
+   * the first day of the week.
    */
   constant(constant: string): void;
 
   /**
    * Determines the duration using a given start date/time and end date/time.
-   * Use the field(String field) method to define start and end date/time fields.
+   * Use the `field(String field)` method to define start and end date/time fields.
    */
   datediff(): void;
 
-  // TODO add remainder
+  /**
+   * Returns an integer representing the day of the week for a given date.
+   * 
+   * @returns If the first day of the week is set to Sunday in the constant(String
+   * constant) method, return values are associated with the following days
+   * of the week:
+   * 
+   * - 1: Sunday
+   * - 2: Monday
+   * - 3: Tuesday
+   * - 4: Wednesday
+   * - 5: Thursday
+   * - 6: Friday
+   * - 7: Saturday
+   * 
+   * If the first day of the week is set to Monday:
+   * 
+   * - 1: Monday
+   * - 2: Tuesday
+   * - 3: Wednesday
+   * - 4: Thursday
+   * - 5: Friday
+   * - 6: Saturday
+   * - 7: Sunday
+   * 
+   * If a value other than 1 or 2 is provided in the `constant(String constant)` method, the 
+   * `dayofweek()` method uses Sunday as the first day of the week.
+   * @example 
+   * 
+   * var functionBuilder = new GlideDBFunctionBuilder();
+   * var dayOfWeekFunction = functionBuilder.dayofweek();
+   * dayOfWeekFunction = functionBuilder.field('opened_at');
+   * dayOfWeekFunction = functionBuilder.constant('2');
+   * dayOfWeekFunction = functionBuilder.build();
+   * 
+   * var gr = new GlideRecord('incident');
+   * gr.addFunction(dayOfWeekFunction);
+   * gr.query();
+   * while(gr.next())
+   *   gs.log(gr.getValue(dayOfWeekFunction));
+   *
+   */
+  dayofweek(): number;
+
+  /**
+   * Divides the value of one integer field by another.
+   * Use the `field(String field)` method to define fields on which the operation is performed.
+   * 
+   * @example 
+   * 
+   * var functionBuilder = new GlideDBFunctionBuilder();
+   * var myDivideFunction = functionBuilder.divide();
+   * myDivideFunction = functionBuilder.field('order');
+   * myDivideFunction = functionBuilder.field('priority');
+   * myDivideFunction = functionBuilder.build();
+   */
+  divide(): void;
+
+  /**
+   * Defines a field on which a SQL operation is performed.
+   *
+   * @param field The field on which you are performing the SQL operation.
+   * @example
+   *
+   * var functionBuilder = new GlideDBFunctionBuilder();
+   * var myAddingFunction = functionBuilder.add();
+   * myAddingFunction = functionBuilder.field('order');
+   * myAddingFunction = functionBuilder.field('priority');
+   * myAddingFunction = functionBuilder.build();
+   */
+  field(field: string): void;
+
+  /**
+   * Determines the number of code units in a field.
+   * Use the `field(String field)` method to define fields on which the operation is performed.
+   *
+   * @example
+   *
+   * var functionBuilder = new GlideDBFunctionBuilder();
+   * var myLengthFunction = functionBuilder.length();
+   * myLengthFunction = functionBuilder.field('short_description');
+   * myLengthFunction = functionBuilder.build();
+   *
+   */
+  length(): void;
+
+  /**
+   * Multiplies the values of two integer fields.
+   * Use the `field(String field)` method to define fields on which the operation is performed.
+   *
+   * @example
+   *
+   * var functionBuilder = new GlideDBFunctionBuilder();
+   * var myMultiplyFunction = functionBuilder.multiply();
+   * myMultiplyFunction = functionBuilder.field('order');
+   * myMultiplyFunction = functionBuilder.field('priority');
+   * myMultiplyFunction = functionBuilder.build();
+   */
+  multiply(): void;
+
+  /**
+   * Subtracts the value of one integer field from another.
+   * Use the `field(String field)` method to define fields on which the operation is performed.
+   *
+   * @example
+   *
+   * var functionBuilder = new GlideDBFunctionBuilder();
+   * var mySubtractFunction = functionBuilder.subtract();
+   * mySubtractFunction = functionBuilder.field('order');
+   * mySubtractFunction = functionBuilder.field('priority');
+   * mySubtractFunction = functionBuilder.build();
+   */
+  subtract(): void;
 }
 
 /**
@@ -1560,17 +1676,17 @@ interface GlideElementDescriptor {
 
   /**
    * Returns the element's encryption type.
-   * 
+   *
    * @returns The element's encryption type. Returns null if the element is not
    * encrypted.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * sEdge = ed.getEncryptionType();
    * gs.info(isEdge);
    * // null
@@ -1579,16 +1695,16 @@ interface GlideElementDescriptor {
 
   /**
    * Returns the element's internal data type.
-   * 
+   *
    * @returns The element's internal data type.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * var isEdge = ed.getInternalType();
    * gs.info(isEdge);
    */
@@ -1596,16 +1712,16 @@ interface GlideElementDescriptor {
 
   /**
    * Returns the element's label.
-   * 
+   *
    * @returns The element's label.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * var isEdge = ed.getLabel();
    * gs.info(isEdge);
    * // Priority
@@ -1614,16 +1730,16 @@ interface GlideElementDescriptor {
 
   /**
    * Returns the element's length.
-   * 
+   *
    * @returns The element's size.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * var isEdge = ed.getLength();
    * gs.info(isEdge);
    * // 40
@@ -1632,16 +1748,16 @@ interface GlideElementDescriptor {
 
   /**
    * Returns the element's name.
-   * 
+   *
    * @returns The element's name.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * var isEdge = ed.getName();
    * gs.info(isEdge);
    * // priority
@@ -1650,10 +1766,10 @@ interface GlideElementDescriptor {
 
   /**
    * Returns the element's plural label.
-   * 
+   *
    * @returns The element's plural label.
-   * @example 
-   * 
+   * @example
+   *
    * var gr = new GlideRecord('incident');
    * gr.query();
    * var ed = gr.getED();
@@ -1664,16 +1780,16 @@ interface GlideElementDescriptor {
 
   /**
    * Returns true if an encrypted attachment has been added to the table.
-   * 
+   *
    * @returns Returns true if an encrypted attachment has been added to the table.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * var isEdge = ed.hasAttachmentsEncrypted();
    * gs.info(isEdge);
    * // false
@@ -1682,15 +1798,15 @@ interface GlideElementDescriptor {
 
   /**
    * Returns true if the element is an automatically generated or system field.
-   * 
+   *
    * @returns True if the element is automatically generated or a system field.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * isEdge = ed.isAutoOrSysID();
    * gs.info(isEdge);
    * // false
@@ -1700,18 +1816,18 @@ interface GlideElementDescriptor {
   /**
    * Returns true if the element is defined as a dropdown choice in its dictionary
    * definition.
-   * 
+   *
    * @returns Returns true if the element is defined as a dropdown choice. Returns true even
    * if there are no entries defined in the choice table. The last choice type,
    * suggestion, does not return true.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * var isChoiceTable = ed.isChoiceTable();
    * gs.info(isChoiceTable);
    * // true
@@ -1720,16 +1836,16 @@ interface GlideElementDescriptor {
 
   /**
    * Returns true if an element is encrypted.
-   * 
+   *
    * @returns Returns true if the element is encrypted, false otherwise.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * var isEdge = ed.isEdgeEncrypted();
    * gs.info(isEdge)
    * // false
@@ -1738,19 +1854,19 @@ interface GlideElementDescriptor {
 
   /**
    * Returns true if the element is a virtual element.
-   * 
+   *
    * A virtual element is a calculated field as set by the dictionary definition of the field.
    * Virtual fields cannot be encrypted.
-   * 
+   *
    * @returns Returns true if the element is a virtual element.
-   * @example 
-   * 
+   * @example
+   *
    * var grInc = new GlideRecord('incident');
    * grInc.query('priority', '1');
-   * 
+   *
    * var field = grInc.getElement('priority');
    * var ed = field.getED();
-   * 
+   *
    * var isVirtual = ed.isVirtual();
    * gs.info(isVirtual);
    * // false
