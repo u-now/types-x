@@ -15,18 +15,4 @@
 
 ## Contribute pull request
 
-- Create a feature branch (TODO: create and link branch naming guidelines?)
-  - `git checkout -b ${branch_name}`
-- Make your changes (edit existing files or create new ones)
-- Commit the changes (TODO: create and link "commit message guidelines")
-  - `git commit --all -m "${commit_message}"`
-- Push the commit(s) to your fork:
-  - `git push origin ${branch_name}`
-- Go to the github page for your fork and click the green "pull request" button
-- If you later need to add new commits to the pull request (after a review for example), you can
-  simply commit the changes to the local branch and then use `git push` to automatically update the
-  pull request.
-
-TODO: Contribute using GitHub's web interface
-
-TODO: Contribute using VS Code
+See the [Project Guidlines](https://github.com/u-now/types-x/wiki)
