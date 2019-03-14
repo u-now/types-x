@@ -15,4 +15,4 @@
 
 ## Contribute pull request
 
-See the [Project Guidlines](https://github.com/u-now/types-x/wiki)
+See the [Project Guidelines](https://github.com/u-now/types-x/wiki)
