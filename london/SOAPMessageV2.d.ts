@@ -2,8 +2,8 @@ declare namespace sn_ws {
   class SOAPMessageV2 {
     constructor();
     constructor(soapMessage: string, soapFunction: string);
-    execute(): servicenow.SOAPResponseV2;
-    executeAsync(): servicenow.SOAPResponseV2;
+    execute(): SOAPResponseV2;
+    executeAsync(): SOAPResponseV2;
     setHttpMethod(method: string): void;
     setHttpTimeout(timeoutMs: number): void;
     setBasicAuth(userName: string, userPass: string): void;
