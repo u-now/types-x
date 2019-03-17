@@ -1,3 +1,3 @@
 declare const GlideGuid: {
-  generate(): string;
+    generate(): string;
 };

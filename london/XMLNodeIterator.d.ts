@@ -1,4 +1,4 @@
 interface XMLNodeIterator {
-  hasNext(): boolean;
-  next(): XMLNode;
+    hasNext(): boolean;
+    next(): XMLNode;
 }
