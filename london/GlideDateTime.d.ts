@@ -190,7 +190,7 @@ declare class GlideDateTime {
      * var gdt2 = new GlideDateTime('2017-06-12 15:11:12');
      * gs.info(gdt1.after(gdt2));
      */
-    after(gdt): boolean;
+    after(gdt: GlideDateTime): boolean;
 
     /**
      * Determines if the GlideDateTime object occurs before the specified GlideDateTime.
@@ -205,7 +205,7 @@ declare class GlideDateTime {
      * gs.info(gdt1.before(gdt2));
      */
 
-    before(gdt): boolean;
+    before(gdt: GlideDateTime): boolean;
 
     /**
      * Compares two date and time objects to determine whether they are equivalent or one occurs
@@ -579,7 +579,7 @@ declare class GlideDateTime {
      * var gdt2 = new GlideDateTime('2017-06-12 15:11:12');
      * gs.info(gdt1.onOrAfter(gdt2));
      */
-    onOrAfter(gdt): boolean;
+    onOrAfter(gdt: GlideDateTime): boolean;
 
     /**
      * Determines if the GlideDateTime object occurs on or before the specified GlideDateTime.
@@ -593,7 +593,7 @@ declare class GlideDateTime {
      * var gdt2 = new GlideDateTime('2017-06-12 15:11:12');
      * gs.info(gdt1.onOrBefore(gdt2));
      */
-    onOrBefore(gdt): boolean;
+    onOrBefore(gdt: GlideDateTime): boolean;
 
     /**
      * Sets the day of the month to a specified value in the current user's time zone.

@@ -3,7 +3,7 @@ declare namespace sn_ws {
      * The RESTResponseV2 API allows you to use the data returned by an outbound REST message
      * in JavaScript code.
      */
-    declare class RESTResponseV2 {
+    class RESTResponseV2 {
         /**
          * Returns all headers contained in the response, including any duplicate headers.
          *

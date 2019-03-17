@@ -36,7 +36,7 @@ declare class GlideScopedEvaluator {
      *   gs.info(evaluator.evaluateScript(gr, 'test_script', vars));
      * }
      */
-    evaluateScript(grObj: GlideRecord, scriptField?: string, variables?: object): any;
+    evaluateScript(grObj: ScopedGlideRecord, scriptField?: string, variables?: object): any;
 
     /**
      * Returns a variable from a GlideScopedEvaluator object.

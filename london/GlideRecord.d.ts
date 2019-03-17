@@ -735,7 +735,7 @@ interface ScopedGlideRecord {
      * // Commonly used in a business rule, returns insert if the current operation is insert
      * gs.info("current operation " + current.operation());
      */
-    operation(): 'insert' | 'update' | 'delete';
+    operation(): GlideRecordOperation;
 
     /**
      * Specifies an orderBy column.
@@ -1655,7 +1655,7 @@ interface ScopedGlideElement {
  *
  * There is no constructor for this class. Use the GlideElement `getED()` method to obtain a
  * GlideElementDescriptor object.
- * 
+ *
  * Actual type com.glide.db.ElementDescriptor (JavaObject).
  */
 interface GlideElementDescriptor {
@@ -1893,3 +1893,5 @@ type QueryOperator =
     | 'DOES NOT CONTAIN'
     | 'INSTANCEOF'
     | 'SAMEAS';
+
+type GlideRecordOperation = 'insert' | 'update' | 'delete';

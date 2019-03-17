@@ -32,19 +32,19 @@ interface GlideSystem {
     error(message: string, parm1?: any, parm2?: any, parm3?: any, parm4?: any, parm5?: any): void;
     eventQueue(
         eventName: string,
-        gr: GlideRecord,
+        gr: ScopedGlideRecord,
         optionalParam1: string,
         optionalParam2: string,
         eventQueue?: string
     ): void;
     eventQueueScheduled(
         name: string,
-        instance: GlideRecord,
+        instance: ScopedGlideRecord,
         parm1: string,
         parm2: string,
         expiration: object
     ): void;
-    executeNow(job: GlideRecord): string;
+    executeNow(job: ScopedGlideRecord): string;
     generateGUID(): string;
     getCallerScopeName(): string;
     getCssCacheVersionString(): string;

@@ -25,6 +25,7 @@
 /// <reference path="GlideServletRequest.d.ts" />
 /// <reference path="GlideServletResponse.d.ts" />
 /// <reference path="GlideSession.d.ts" />
+/// <reference path="GlideStringUtil.d.ts" />
 /// <reference path="GlideSysAttachment.d.ts" />
 /// <reference path="GlideSystem.d.ts" />
 /// <reference path="GlideTime.d.ts" />

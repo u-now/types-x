@@ -5,7 +5,7 @@ declare namespace sn_ws {
      *
      * You can use this API in scoped applications, or within the global scope.
      */
-    declare class RESTMessageV2 {
+    class RESTMessageV2 {
         /**
          * Instantiates an empty RESTMessageV2 object.
          *

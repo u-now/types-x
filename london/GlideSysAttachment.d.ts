@@ -7,18 +7,18 @@ declare class GlideSysAttachment {
         destinationSysId: string
     ): void;
     deleteAttachment(sysId: string): void;
-    getContent(record: servicenow.GlideRecord): any;
-    getContentBase64(record: servicenow.GlideRecord): string;
+    getContent(record: ScopedGlideRecord): any;
+    getContentBase64(record: ScopedGlideRecord): string;
     getContentStream(sysId: string): object;
-    write(record: servicenow.GlideRecord, fileName: string, contentType: string, data: any): string;
+    write(record: ScopedGlideRecord, fileName: string, contentType: string, data: any): string;
     writeBase64(
-        record: servicenow.GlideRecord,
+        record: ScopedGlideRecord,
         fileName: string,
         contentType: string,
         base64Content: string
     ): string;
     writeContentStream(
-        record: servicenow.GlideRecord,
+        record: ScopedGlideRecord,
         fileName: string,
         contentType: string,
         inputStream: object

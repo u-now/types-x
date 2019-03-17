@@ -31,6 +31,7 @@
         "GlideServletRequest.d.ts",
         "GlideServletResponse.d.ts",
         "GlideSession.d.ts",
+        "GlideStringUtil.d.ts",
         "GlideSysAttachment.d.ts",
         "GlideSystem.d.ts",
         "GlideTime.d.ts",
