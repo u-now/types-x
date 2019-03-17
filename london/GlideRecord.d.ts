@@ -1,15 +1,17 @@
+declare const GlideRecord: ScopedGlideRecord;
+
 /**
  * Scoped GlideRecord is used for database operations.
  */
-declare class GlideRecord {
-    readonly sys_created_by: string & GlideElement;
-    readonly sys_created_on: GlideDateTime & GlideElement;
-    readonly sys_id: string;
-    readonly sys_mod_count: number & GlideElement;
-    readonly sys_updated_by: string & GlideElement;
-    readonly sys_updated_on: GlideDateTime & GlideElement;
-    variables: object;
-    [fieldName: string]: GlideElement;
+interface ScopedGlideRecord {
+    readonly sys_created_by: string & ScopedGlideElement;
+    readonly sys_created_on: GlideDateTime & ScopedGlideElement;
+    readonly sys_id: string & ScopedGlideElement;
+    readonly sys_mod_count: number & ScopedGlideElement;
+    readonly sys_updated_by: string & ScopedGlideElement;
+    readonly sys_updated_on: GlideDateTime & ScopedGlideElement;
+    variables: { [name: string]: any };
+    [fieldName: string]: any;
 
     /**
      * Creates an instance of the GlideRecord class for the specified table.
@@ -19,7 +21,7 @@ declare class GlideRecord {
      *
      * var gr = new GlideRecord('incident');
      */
-    constructor(tableName: string);
+    new (tableName: string): ScopedGlideRecord;
 
     /**
      * Adds a filter to return active records.
@@ -31,7 +33,7 @@ declare class GlideRecord {
      * inc.addActiveQuery();
      * inc.query();
      */
-    addActiveQuery(): GlideQueryCondition;
+    addActiveQuery(): ScopedQueryCondition;
 
     /**
      * Adds an encoded query to other queries that may have been set.
@@ -111,7 +113,7 @@ declare class GlideRecord {
         joinTable: string,
         primaryField?: string,
         joinTableField?: string
-    ): GlideQueryCondition;
+    ): ScopedQueryCondition;
 
     /**
      * A filter that specifies records where the value of the field passed in the parameter is not
@@ -130,7 +132,7 @@ declare class GlideRecord {
      *   // add code here to process the incident record
      * }
      */
-    addNotNullQuery(fieldName: string): GlideQueryCondition;
+    addNotNullQuery(fieldName: string): ScopedQueryCondition;
 
     /**
      * Adds a filter to return records where the value of the specified field is null.
@@ -147,7 +149,7 @@ declare class GlideRecord {
      *   // add code here to process the incident record
      * }
      */
-    addNullQuery(fieldName: string): GlideQueryCondition;
+    addNullQuery(fieldName: string): ScopedQueryCondition;
 
     /**
      * Provides the ability to build a request, which when executed, returns the rows from the
@@ -167,7 +169,7 @@ declare class GlideRecord {
      *   rec.update();
      * }
      */
-    addQuery(name: string, value: any): GlideQueryCondition;
+    addQuery(name: string, value: any): ScopedQueryCondition;
 
     /**
      * Provides the ability to build a request, which when executed, returns the rows from the
@@ -219,7 +221,7 @@ declare class GlideRecord {
      *   //do something....
      * }
      */
-    addQuery(name: string, operator: QueryOperator, value: any): GlideQueryCondition;
+    addQuery(name: string, operator: QueryOperator, value: any): ScopedQueryCondition;
 
     /**
      * Adds a filter to return records using an encoded query string.
@@ -237,7 +239,7 @@ declare class GlideRecord {
      *   rec.update();
      * }
      */
-    addQuery(query: string): GlideQueryCondition;
+    addQuery(query: string): ScopedQueryCondition;
 
     /**
      * Determines if the Access Control Rules, which include the user's roles, permit
@@ -447,7 +449,7 @@ declare class GlideRecord {
      * gr.insert();
      * gs.info(gr.getElement('short_description'));
      */
-    getElement(columnName: string): GlideElement;
+    getElement(columnName: string): ScopedGlideElement;
 
     /**
      * Retrieves the query condition of the current result set as an encoded query string.
@@ -730,10 +732,10 @@ declare class GlideRecord {
      * @returns The current operation.
      * @example
      *
-     * //Commonly used in a business rule, returns insert if the current operation is insert
+     * // Commonly used in a business rule, returns insert if the current operation is insert
      * gs.info("current operation " + current.operation());
      */
-    operation(): GlideRecordOperation;
+    operation(): 'insert' | 'update' | 'delete';
 
     /**
      * Specifies an orderBy column.
@@ -937,13 +939,13 @@ declare class GlideRecord {
     _query(name?: string, value?: any): void;
 }
 
-declare interface GlideQueryCondition {
+interface ScopedQueryCondition {
     /**
      * Adds an AND condition to the current condition.
      *
-     * @param {string} name The name of a field.
-     * @param {(object | string | number)} value The value to query on.
-     * @returns {GlideQueryCondition} A reference to a GlideQueryConditon that was added to the GlideRecord.
+     * @param name The name of a field.
+     * @param value The value to query on.
+     * @returns A reference to a GlideQueryConditon that was added to the GlideRecord.
      * @example
      * var gr = new GlideRecord('incident');
      * var qc = gr.addQuery('category', 'Hardware');
@@ -953,31 +955,31 @@ declare interface GlideQueryCondition {
      * gr.number;
      * gs.info(gr.getEncodedQuery());
      */
-    addCondition(name: string, value: object | string | number): GlideQueryCondition;
+    addCondition(name: string, value: object | string | number): ScopedQueryCondition;
 
     /**
      * Adds an AND condition to the current condition.
      *
-     * @param {string} name The name of a field.
-     * @param {QueryOperator} oper The operator for the query.
+     * @param name The name of a field.
+     * @param oper The operator for the query.
      * If you do not specify an operator, the condition uses an equals operator.
-     * @param {(object | string | number)} value The value to query on.
-     * @returns {GlideQueryCondition} A reference to a GlideQueryConditon that was added to the GlideRecord.
+     * @param value The value to query on.
+     * @returns A reference to a GlideQueryConditon that was added to the GlideRecord.
      */
     addCondition(
         name: string,
         oper: QueryOperator,
         value: object | string | number
-    ): GlideQueryCondition;
+    ): ScopedQueryCondition;
 
     /**
      * Appends a 2-or-3 parameter OR condition to an existing GlideQueryCondition.
      *
-     * @param {string} name Field name
-     * @param {(object | string | number)} value The value to query on.
-     * @returns {GlideQueryCondition} A reference to a GlideQueryConditon that was added to the GlideRecord.
+     * @param name Field name
+     * @param value The value to query on.
+     * @returns A reference to a GlideQueryConditon that was added to the GlideRecord.
      */
-    addOrCondition(name: string, value: object | string | number): GlideQueryCondition;
+    addOrCondition(name: string, value: object | string | number): ScopedQueryCondition;
 
     /**
      * Appends a 2-or-3 parameter OR condition to an existing GlideQueryCondition.
@@ -1007,7 +1009,7 @@ declare interface GlideQueryCondition {
      * @param value The value to query on.
      * @returns A reference to a GlideQueryConditon that was added to the GlideRecord.
      */
-    addOrCondition(name: string, oper: QueryOperator, value: any): GlideQueryCondition;
+    addOrCondition(name: string, oper: QueryOperator, value: any): ScopedQueryCondition;
 }
 
 declare class GlideDBFunctionBuilder {
@@ -1205,7 +1207,7 @@ declare class GlideDBFunctionBuilder {
  * with fields and their values. Scoped GlideElement methods are available for the fields of the
  * current GlideRecord.
  */
-interface GlideElement {
+interface ScopedGlideElement {
     /**
      * Determines if the user's role permits the creation of new records in this field.
      *
@@ -1515,7 +1517,7 @@ interface GlideElement {
      *     gs.print( grUSER.getValue('name') );
      * }
      */
-    getRefRecord(): GlideRecord;
+    getRefRecord(): ScopedGlideRecord;
 
     /**
      * Returns the name of the table on which the field resides.
@@ -1574,7 +1576,7 @@ interface GlideElement {
      * gr.initialize();
      * gr.opened_at.setDateNumericValue(10000);
      */
-    setDateNumericValue(milliseconds): void;
+    setDateNumericValue(milliseconds: number): void;
 
     /**
      * Sets the display value of the field.
@@ -1653,6 +1655,8 @@ interface GlideElement {
  *
  * There is no constructor for this class. Use the GlideElement `getED()` method to obtain a
  * GlideElementDescriptor object.
+ * 
+ * Actual type com.glide.db.ElementDescriptor (JavaObject).
  */
 interface GlideElementDescriptor {
     /**
@@ -1887,6 +1891,5 @@ type QueryOperator =
     | 'ENDSWITH'
     | 'CONTAINS'
     | 'DOES NOT CONTAIN'
-    | 'INSTANCEOF';
-
-type GlideRecordOperation = 'insert' | 'update' | 'delete';
+    | 'INSTANCEOF'
+    | 'SAMEAS';
