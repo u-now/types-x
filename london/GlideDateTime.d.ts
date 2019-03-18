@@ -787,7 +787,7 @@ declare class GlideDateTime {
      * var dur = GlideDateTime.subtract(gdt1, gdt2); //the difference between gdt1 and gdt2
      * gs.info(dur.getDisplayValue());
      */
-    subtract(start: GlideDateTime, end?: GlideDateTime): GlideDuration;
+    static subtract(start: GlideDateTime, end?: GlideDateTime): GlideDuration;
 
     /**
      * Subtracts a specified amount of time from the current GlideDateTime object.

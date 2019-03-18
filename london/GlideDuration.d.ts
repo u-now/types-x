@@ -135,7 +135,7 @@ declare class GlideDuration {
     /**
      * Sets the internal value of the GlideDuration object.
      *
-     * @param o The duration in the object's internal format, which is the date and time from
+     * @param value The duration in the object's internal format, which is the date and time from
      * January 1, 1970, 00:00:00.
      * @example
      *
@@ -144,7 +144,7 @@ declare class GlideDuration {
      * dur.setValue('1970-01-05 08:00:00');
      * gs.info(dur.getDisplayValue());
      */
-    setValue(o: object): void;
+    setValue(value: string): void;
 
     /**
      * Subtracts the specified duration from the current duration.

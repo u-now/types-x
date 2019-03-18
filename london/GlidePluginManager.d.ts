@@ -1,3 +1,3 @@
-declare const GlidePluginManager: {
+declare class GlidePluginManager {
     isActive(pluginId: string): boolean;
-};
+}
