@@ -1,5 +1,3 @@
-declare const gs: GlideSystem;
-
 interface GlideSystem {
     addErrorMessage(message: string): void;
     addInfoMessage(message: string): void;

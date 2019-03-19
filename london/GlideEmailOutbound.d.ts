@@ -1,5 +1,3 @@
-declare const email: GlideEmailOutbound;
-
 /**
  * The scoped GlideEmailOutbound class implements the email object for scoped applications.
  * You can use the GlideEmailOutbound methods with the email global object available in mail
