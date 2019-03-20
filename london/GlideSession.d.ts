@@ -8,5 +8,6 @@ interface GlideSession {
     getTimeZoneName(): string;
     getSessionToken(): string;
     getUrlOnStack(): string;
+    isImpersonating(): boolean;
     putClientData(paramName: string, paramValue: string): void;
 }

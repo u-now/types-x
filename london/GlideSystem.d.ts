@@ -51,7 +51,7 @@ interface GlideSystem {
     getErrorMessages(id: string, args?: string[]): string;
     getMessage(id: string, object?: any): string;
     getProperty(key: string, altobject?: {}): {};
-    getSession(): string | GlideSession;
+    getSession(): GlideSession;
     getSessionID(): string;
     getSessionToken(): string;
     getTimeZoneName(): string;

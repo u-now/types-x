@@ -126,9 +126,9 @@ declare class GlideSchedule {
      * Loads a schedule with the schedule information.
      *
      * @param sysID The system ID of the schedule.
-     * @param timeZone (Optional) The timezone. If a timezone is not specified, or is nil, the
+     * @param [timeZone] (Optional) The timezone. If a timezone is not specified, or is nil, the
      * current session timezone is used for the schedule.
-     * @param excludeSpanID Any span to exclude.
+     * @param [excludeSpanID] Any span to exclude.
      * @returns Method does not return a value
      *
      * @example
@@ -136,7 +136,7 @@ declare class GlideSchedule {
      * var x = new GlideSchedule();
      * x.load('08fcd0830a0a0b2600079f56b1adb9ae');
      */
-    load(sysId: string, timeZone: string, excludeSpanId: string): void;
+    load(sysId: string, timeZone?: string, excludeSpanId?: string): void;
 
     /**
      * Sets the timezone for the current schedule.
@@ -155,8 +155,8 @@ declare class GlideSchedule {
      * Determines how much time (in milliseconds) until start time of the next schedule
      * item.
      *
-     * @param {GlideDateTime} time The time to be evaluated.
-     * @param {String} timeZone The timezone.
+     * @param time The time to be evaluated.
+     * @param [timeZone] The timezone.
      * @returns The number of milliseconds until the start time of the next schedule item.
      * Returns -1 if never.
      *
@@ -166,5 +166,5 @@ declare class GlideSchedule {
      * var glideSchedule = new GlideSchedule('08fcd0830a0a0b2600079f56b1adb9ae', 'UTC');
      * gs.info(glideSchedule.whenNext(startDate));
      */
-    whenNext(time: GlideDateTime, timeZone: string): number;
+    whenNext(time: GlideDateTime, timeZone?: string): number;
 }
