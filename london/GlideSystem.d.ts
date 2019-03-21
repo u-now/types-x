@@ -49,6 +49,7 @@ interface GlideSystem {
     getCurrentApplicationId(): string;
     getCurrentScopeName(): string;
     getErrorMessages(id: string, args?: string[]): string;
+    getEscapedMessage(id: string, object?: any): string;
     getMessage(id: string, object?: any): string;
     getProperty(key: string, altobject?: {}): {};
     getSession(): GlideSession;
@@ -62,6 +63,9 @@ interface GlideSystem {
     getUserName(): string;
     getUserNameByUserID(id: string): string;
     hasRole(roleName: string): boolean;
+    hoursAgo(hours: number): string;
+    hoursAgoEnd(hours: number): string;
+    hoursAgoStart(hours: number): string;
     include(include: string): void;
     info(message: any, parm1?: any, parm2?: any, parm3?: any, parm4?: any, parm5?: any): void;
     isDebugging(): boolean;
@@ -76,6 +80,7 @@ interface GlideSystem {
     nil(object: any): boolean;
     quartersAgoEnd(num: number): string;
     quartersAgoStart(num: number): string;
+    setProperty(key: string, value: string, description: string): void;
     setRedirect(uri: string): void;
     tableExists(table: string): boolean;
     warn(message: string, parm1?: any, parm2?: any, parm3?: any, parm4?: any, parm5?: any): void;
