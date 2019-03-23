@@ -1,6 +1,6 @@
 declare namespace sn_ws {
-    interface RESTAPIRequestBody<T> {
-        readonly data: T;
+    interface RESTAPIRequestBody {
+        readonly data: any;
         readonly dataStream: object;
         readonly dataString: string;
         hasNext(): boolean;

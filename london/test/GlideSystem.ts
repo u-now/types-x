@@ -209,6 +209,3 @@
     var jsonObject = gs.xmlToJSON(xmlString);
     gs.info(jsonObject);
 })();
-(function () {
-  
-}());

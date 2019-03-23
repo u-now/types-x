@@ -62,7 +62,7 @@ declare class GlideTime {
      * gt.setValue("01:00:00"); //Internal Time Zone , UTC
      * gs.info(gt.getDisplayValueInternal()); //User Time Zone
      */
-    getDisplayValueinternal(): string;
+    getDisplayValueInternal(): string;
 
     /**
      * Returns the hours part of the time using the local time zone.
