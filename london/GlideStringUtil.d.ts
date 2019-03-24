@@ -1,16 +1,16 @@
-declare class GlideStringUtil {
-    static dotToUnderBar(sourceString: string): string;
-    static escapeAllQuotes(sourceString: string): string;
-    static escapeForHomePage(sourceString: string): string;
-    static escapeHTML(htmlString: string): string;
-    static escapeNonPrintable(sourceString: string): string;
-    static escapeQueryTermSeparator(sourceString: string): string;
-    static escapeTicks(sourceString: string): string;
-    static getHTMLValue(sourceString: string): string;
-    static getNumeric(sourceString: string): string;
-    static isBase64(sourceString: string): boolean;
-    static isEligibleSysID(sourceString: string): boolean;
-    static newLinesToBreaks(sourceString: string): string;
-    static normalizeWhitespace(sourceString: string): string;
-    static unescapeHTML(htmlString: string): string;
-}
+declare const GlideStringUtil: {
+    dotToUnderBar(sourceString: string): string;
+    escapeAllQuotes(sourceString: string): string;
+    escapeForHomePage(sourceString: string): string;
+    escapeHTML(htmlString: string): string;
+    escapeNonPrintable(sourceString: string): string;
+    escapeQueryTermSeparator(sourceString: string): string;
+    escapeTicks(sourceString: string): string;
+    getHTMLValue(sourceString: string): string;
+    getNumeric(sourceString: string): string;
+    isBase64(sourceString: string): boolean;
+    isEligibleSysID(sourceString: string): boolean;
+    newLinesToBreaks(sourceString: string): string;
+    normalizeWhitespace(sourceString: string): string;
+    unescapeHTML(htmlString: string): string;
+};

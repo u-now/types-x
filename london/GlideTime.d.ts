@@ -1,8 +1,6 @@
 /**
  * The scoped GlideTime class provides methods for performing operations on GlideTime
  * objects, such as instantiating GlideTime objects or working with GlideTime fields.
- *
- * @class GlideTime
  */
 declare class GlideTime {
     /**

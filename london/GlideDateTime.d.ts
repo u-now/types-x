@@ -211,7 +211,7 @@ declare class GlideDateTime {
      * Compares two date and time objects to determine whether they are equivalent or one occurs
      * before or after the other.
      *
-     * @param {Object} o Date and time object in GlideDateTime format
+     * @param o Date and time object in GlideDateTime format
      * @returns
      * 0 = Dates are equal
      * 1 = The object's date is after the date specified in the parameter
@@ -792,7 +792,7 @@ declare class GlideDateTime {
     /**
      * Subtracts a specified amount of time from the current GlideDateTime object.
      *
-     * @param {GlideTime} time The time value to subtract.
+     * @param time The time value to subtract.
      * @example
      *
      * var gdt = new GlideDateTime('2011-08-31 08:00:00');

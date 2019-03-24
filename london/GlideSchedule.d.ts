@@ -2,9 +2,6 @@
  * The scoped GlideSchedule API provides methods for performing operations on GlideSchedule
  * objects, such as adding new schedule segments to a schedule, determining if a datetime is within
  * the schedule, or setting the schedule timezone.
- *
- * @class GlideSchedule
- * @typedef {Object}  GlideSchedule
  */
 declare class GlideSchedule {
     /**
@@ -141,7 +138,7 @@ declare class GlideSchedule {
     /**
      * Sets the timezone for the current schedule.
      *
-     * @param {String} timeZone The timezone.
+     * @param timeZone The timezone.
      * @returns Method does not return a value
      *
      * @example

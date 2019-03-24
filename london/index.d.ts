@@ -1,4 +1,4 @@
-// Type definitions for ServiceNow Scoped API - London
+// Type definitions for non-npm package servicenow-london 1.0
 // Project: https://developer.servicenow.com/app.do#!/api_doc?v=london
 // Definitions by: John Caruso <https://github.com/johncaruso>
 //                 Bryce Godfrey <https://github.com/bryceg>
@@ -7,6 +7,7 @@
 //                 Tim Woodruff <https://github.com/thisnameissoclever>
 //                 Anim Yeboah <https://github.com/ayeboah>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+// TypeScript Version: 2.8
 
 /// <reference path="Class.d.ts" />
 /// <reference path="GlideDate.d.ts" />
@@ -31,13 +32,13 @@
 /// <reference path="GlideTime.d.ts" />
 /// <reference path="GlideUser.d.ts" />
 /// <reference path="QueryOperator.d.ts" />
+/// <reference path="RenderProperties.d.ts" />
 /// <reference path="RESTAPIRequest.d.ts" />
 /// <reference path="RESTAPIRequestBody.d.ts" />
 /// <reference path="RESTAPIResponse.d.ts" />
 /// <reference path="RESTAPIResponseStream.d.ts" />
 /// <reference path="RESTMessageV2.d.ts" />
 /// <reference path="RESTResponseV2.d.ts" />
-/// <reference path="RenderProperties.d.ts" />
 /// <reference path="ScopedElementDescriptor.d.ts" />
 /// <reference path="ScopedGlideElement.d.ts" />
 /// <reference path="ScopedGlideRecord.d.ts" />

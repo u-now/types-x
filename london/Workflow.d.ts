@@ -10,7 +10,7 @@ declare namespace global {
         getContexts(record: ScopedGlideRecord): ScopedGlideRecord;
         getEstimatedDeliveryTime(workflowId: string): string;
         getEstimatedDeliveryTimeFromWFVersion(wfVersion: ScopedGlideRecord): string;
-        
+
         /**
          * Get the return value set by activity "Return Value"
          *
@@ -27,9 +27,9 @@ declare namespace global {
 
         /**
          * Run all flows attached to a current GlideRecord.
-         * 
-         * Calling this method on a current will not implicitly update the current. If the workflow 
-         * modifies the input current to this method, it is up to the caller to call 
+         *
+         * Calling this method on a current will not implicitly update the current. If the workflow
+         * modifies the input current to this method, it is up to the caller to call
          * current.update() to persist these changes.
          *
          * @param record A GlideRecord that holds the current record

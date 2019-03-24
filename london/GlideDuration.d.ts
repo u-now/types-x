@@ -4,8 +4,6 @@
  * GlideDuration objects store the duration as a date and time from January 1, 1970, 00:00:00.
  * As a result, setValue() and getValue() use the scoped GlideDateTime object for parameters and
  * return values.
- *
- * @class GlideDuration
  */
 declare class GlideDuration {
     /**

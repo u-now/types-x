@@ -1,8 +1,6 @@
 /**
  * The scoped GlideDate class provides methods for performing operations on GlideDate
  * objects, such as instantiating GlideDate objects or working with GlideDate fields.
- *
- * @class GlideDate
  */
 declare class GlideDate {
     /**
