@@ -1,3 +1,13 @@
+interface ScopedGlideRecord {
+    new (tableName: 'othertype'): OtherType;
+}
+interface OtherType extends ScopedGlideRecord {
+    someproperty: string;
+}
+(function testMerging() {
+    var gr = new GlideRecord('othertype');
+    gr.someproperty = 'foo';
+})();
 (function() {
     var inc = new GlideRecord('incident');
     inc.addActiveQuery();

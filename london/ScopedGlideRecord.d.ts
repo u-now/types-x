@@ -406,7 +406,7 @@ interface ScopedGlideRecord {
      *
      * @returns Element's descriptor
      * @example
-     * 
+     *
      * var gr = new GlideRecord('incident');
      * var ed = gr.getED();
      * gs.info(ed.getLabel());
@@ -432,7 +432,7 @@ interface ScopedGlideRecord {
 
     /**
      * Returns an array of GlideElements for the current record.
-     * 
+     *
      * @returns The array of GlideElements for the current record.
      */
     getElements(): [ScopedGlideElement];
@@ -773,9 +773,9 @@ interface ScopedGlideRecord {
     setAbortAction(b: boolean): void;
 
     /**
-     * Scoped API docs include `setDateNumericValue` but it is not a valid method. 
+     * Scoped API docs include `setDateNumericValue` but it is not a valid method.
      * When called, it throws:
-     *   org.mozilla.javascript.EcmaError: Cannot find function setDateNumericValue in object 
+     *   org.mozilla.javascript.EcmaError: Cannot find function setDateNumericValue in object
      *   [object GlideRecord].
      */
     // setDateNumericValue(milliseconds: number): void;
