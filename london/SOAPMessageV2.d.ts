@@ -14,6 +14,7 @@ declare namespace sn_ws {
         setMIDServer(midServer: string): void;
         setRequestBody(body: string): void;
         setRequestHeader(name: string, value: string): void;
+        setSOAPAction(soapAction: string): void;
         setStringParameter(name: string, value: string): void;
         setStringParameterNoEscape(name: string, value: string): void;
         setWSSecurity(

@@ -58,3 +58,4 @@ declare const g_processor: GlideScriptedProcessor;
 declare const g_request: GlideServletRequest;
 declare const g_response: GlideServletResponse;
 declare const gs: GlideSystem;
+declare const previous: ScopedGlideRecord;

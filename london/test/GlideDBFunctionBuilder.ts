@@ -6,9 +6,6 @@
     var func = functionBuilder.build();
 })();
 (function() {
-    var builder = new GlideDBFunctionBuilder();
-})();
-(function() {
     var functionBuilder = new GlideDBFunctionBuilder();
     var myAddingFunction = functionBuilder.add();
     myAddingFunction = functionBuilder.field('order');

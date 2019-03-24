@@ -64,7 +64,7 @@ interface ScopedGlideElement {
      *   gs.eventQueue('incident.inactive', current, current.incident_state, previous.incident_state);
      * }
      */
-    changesFrom(o: object): boolean;
+    changesFrom(o: any): boolean;
 
     /**
      * Determines if the new value of a field, after a change, matches the specified object.
@@ -81,7 +81,7 @@ interface ScopedGlideElement {
      *   gs.eventQueue('incident.inactive', current, current.incident_state, previous.incident_state);
      * }
      */
-    changesTo(o: object): boolean;
+    changesTo(o: any): boolean;
 
     /**
      * Returns the value of the specified attribute from the dictionary.

@@ -128,7 +128,7 @@ interface ScopedElementDescriptor {
      * gs.info(ed.getPlural());
      * // Incidents
      */
-    getPlural(): boolean;
+    getPlural(): string;
 
     /**
      * Returns true if an encrypted attachment has been added to the table.

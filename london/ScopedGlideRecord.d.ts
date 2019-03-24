@@ -406,30 +406,11 @@ interface ScopedGlideRecord {
      *
      * @returns Element's descriptor
      * @example
-     *
-     * var totalCritical  = 0;
-     * var filledCritical = 0;
-     * var fields         = current.getFields();
-     * gs.print(fields);
-     * for (var num = 0; num &lt; fields.size(); num++) {
-     *   gs.print("RUNNING ARRAY VALUE " + num);
-     *   var ed = fields.get(num).getED();
-     *   if(ed.hasAttribute("tiaa_critical")) {
-     *     gs.print("CRITICAL FIELD FOUND");
-     *     totalCritical ++;
-     *     if (!fields.get(num).isNil()) {
-     *       filledCritical ++;
-     *     }
-     *   }
-     * }
-     * var answer = 0;
-     * gs.print("TOTAL - " + totalCritical);
-     * gs.print("FILLED - " + filledCritical);
-     * if (filledCritical &gt; 0 &amp;&amp; totalCritical &gt; 0) {
-     *   var pcnt = (filledCritical/totalCritical)*100;
-     *   answer = pcnt.toFixed(2);;
-     * }
-     * answer;
+     * 
+     * var gr = new GlideRecord('incident');
+     * var ed = gr.getED();
+     * gs.info(ed.getLabel());
+     * // Incident
      */
     getED(): ScopedElementDescriptor;
 
@@ -477,28 +458,9 @@ interface ScopedGlideRecord {
      * @returns Field's label
      * @example
      *
-     * template.print("Summary of Requested items:\n");
-     * var gr = new GlideRecord("sc_req_item");
-     * gr.addQuery("request", current.sysapproval);
-     * gr.query();
-     * while(gr.next()) {
-     *   var nicePrice = gr.price.toString();
-     *   if (nicePrice != '') {
-     *     nicePrice = parseFloat(nicePrice);
-     *     nicePrice = nicePrice.toFixed(2);
-     *   }
-     *   template.print(gr.number + ":  " + gr.quantity + " X " + gr.cat_item.getDisplayValue()
-     *   + " at $" + nicePrice + " each \n");
-     *   template.print("    Options:\n");
-     *   for (key in gr.variables) {
-     *     var v = gr.variables[key];
-     *     if(v.getGlideObject().getQuestion().getLabel() != '') {
-     *       template.space(4);
-     *       template.print('     ' +  v.getGlideObject().getQuestion().getLabel() + " = "
-     *         + v.getDisplayValue() + "\n");
-     *     }
-     *   }
-     * }
+     * var gr = new GlideRecord('incident');
+     * gs.info(gr.getLabel());
+     * // Incident
      */
     getLabel(): string;
 
@@ -804,28 +766,19 @@ interface ScopedGlideRecord {
      * @example
      *
      * // Often used in business rule to check whether the current operation should be aborted.
-     * if (current.size &gt; 16) {
+     * if (current.size > 16) {
      *   current.setAbortAction(true);
      * }
      */
     setAbortAction(b: boolean): void;
 
     /**
-     * Sets the duration field to a number of milliseconds since January 1, 1970, 00:00:00 GMT for a
-     * duration field. Does not require the creation of a GlideDateTime object because the duration
-     * field is already a GlideDateTime object.
-     *
-     * @param milliseconds Number of milliseconds spanned by the duration.
-     * @example
-     *
-     * var inc = new GlideRecord('incident');
-     * inc.get('17c90efb13418700cc36b1422244b05d');
-     * var timems = inc.calendar_duration.dateNumericValue();
-     * timems = timems + 11*1000;
-     * inc.calendar_duration.setDateNumericValue(timems)
-     * gs.info(inc.calendar_duration.getValue());
+     * Scoped API docs include `setDateNumericValue` but it is not a valid method. 
+     * When called, it throws:
+     *   org.mozilla.javascript.EcmaError: Cannot find function setDateNumericValue in object 
+     *   [object GlideRecord].
      */
-    setDateNumericValue(milliseconds: number): void;
+    // setDateNumericValue(milliseconds: number): void;
 
     /**
      * Sets the limit for number of records are fetched by the GlideRecord query.

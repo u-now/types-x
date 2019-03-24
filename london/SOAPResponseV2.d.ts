@@ -1,12 +1,14 @@
 declare namespace sn_ws {
     interface SOAPResponseV2 {
-        waitForResponse(timeoutSecs: number): void;
-        getStatusCode(): number;
-        getHeader(name: string): string;
-        getHeaders(): object;
+        getAllHeaders(): [{ name: string; value: string }];
         getBody(): string;
-        haveError(): boolean;
+        getCookies(): { size: () => number; get: (index: number) => string };
         getErrorCode(): number;
         getErrorMessage(): string;
+        getHeader(name: string): string;
+        getHeaders(): object;
+        getStatusCode(): number;
+        haveError(): boolean;
+        waitForResponse(timeoutSecs: number): void;
     }
 }

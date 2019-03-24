@@ -8,7 +8,6 @@
         gs.info('got it');
     }
 
-    const wf = new global.Workflow();
 
     const rest = new sn_ws.RESTMessageV2();
 
