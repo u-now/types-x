@@ -27,7 +27,7 @@ declare namespace sn_ws {
          * var id = pathParams.id; //‘1234’
          */
         readonly pathParams: { [paramName: string]: string };
-
+        
         readonly queryParams: { [paramName: string]: string[] };
         readonly queryString: string;
         readonly uri: string;
