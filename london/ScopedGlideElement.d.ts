@@ -84,6 +84,20 @@ interface ScopedGlideElement {
     changesTo(o: any): boolean;
 
     /**
+     * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT for a duration field.
+     * Does not require the creation of a GlideDateTime object because the duration field is already a
+     * GlideDateTime object.
+     *
+     * @returns Number of milliseconds since January 1, 1970, 00:00:00 GMT.
+     * @example
+     *
+     * var inc = new GlideRecord('incident');
+     * inc.get('17c90efb13418700cc36b1422244b05d');
+     * gs.info(inc.calendar_duration.dateNumericValue());
+     */
+    dateNumericValue(): number;
+
+    /**
      * Returns the value of the specified attribute from the dictionary.
      *
      * If the attribute is a boolean attribute, use `getBooleanAttribute(String)` to get the value as

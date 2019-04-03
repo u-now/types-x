@@ -310,20 +310,6 @@ interface ScopedGlideRecord {
     chooseWindow(firstRow: number, lastRow: number, forceCount?: boolean): void;
 
     /**
-     * Returns the number of milliseconds since January 1, 1970, 00:00:00 GMT for a duration field.
-     * Does not require the creation of a GlideDateTime object because the duration field is already a
-     * GlideDateTime object.
-     *
-     * @returns Number of milliseconds since January 1, 1970, 00:00:00 GMT.
-     * @example
-     *
-     * var inc = new GlideRecord('incident');
-     * inc.get('17c90efb13418700cc36b1422244b05d');
-     * gs.info(inc.calendar_duration.dateNumericValue());
-     */
-    dateNumericValue(): number;
-
-    /**
      * Deletes multiple records that satisfy the query condition.
      *
      * @example
