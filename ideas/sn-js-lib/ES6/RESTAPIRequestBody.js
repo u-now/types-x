@@ -10,7 +10,8 @@ class RESTAPIRequestBody {
      * Determine if there are additional entries in the request body.
      * @returns True if there are additional entries available. This method returns true only
      * once if the request contains a single entry.
-     * @example var requestBody = request.body;
+     * @example
+     * var requestBody = request.body;
      * requestBody.hasNext(); // returns true if the request contains a single entry or multiple entries
      * //calling second time
      * requestBody.hasNext(); // returns false if the request contains a single entry, or true if the request contains multiple entries
