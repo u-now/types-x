@@ -1,31 +1,29 @@
 declare namespace sn_ws {
     /**
-* A RESTAPIRequestBody object allows you to access the body content of a scripted REST API request
-* in scripts.
-
-* The format of a RESTAPIRequestBody object may be JSON or XML, depending on the content-type
-* header value from the request.
-
-* Note: You cannot instantiate objects of this type. Objects of this type are created
-* automatically and are accessible only in scripted REST API resource scripts.
-
-* @typedef RESTAPIRequestBody
-* @example
-*
-* {
-*    "name": "user1",
-*    "id": 1234,
-*    "roles": [
-*     {
-*      "name": "admin"
-*     },
-*     {
-*      "name": "itil"
-*     }
-*    ]
-*   }
-*/
-
+     * A RESTAPIRequestBody object allows you to access the body content of a scripted REST API request
+     * in scripts.
+     *
+     * The format of a RESTAPIRequestBody object may be JSON or XML, depending on the content-type
+     * header value from the request.
+     *
+     * Note: You cannot instantiate objects of this type. Objects of this type are created
+     * automatically and are accessible only in scripted REST API resource scripts.
+     *
+     * @example
+     *
+     * {
+     *   "name": "user1",
+     *   "id": 1234,
+     *   "roles": [
+     *     {
+     *       "name": "admin"
+     *     },
+     *     {
+     *       "name": "itil"
+     *     }
+     *   ]
+     * };
+     */
     interface RESTAPIRequestBody {
         /**
          * The content of the request body.
@@ -77,6 +75,7 @@ declare namespace sn_ws {
          * Determine if there are additional entries in the request body.
          *
          * Use this method with the nextEntry() method to iterate over multiple request body entries.
+         * 
          * @returns True if there are additional entries available. This method returns true only
          * once if the request contains a single entry.
          * @example
@@ -93,15 +92,23 @@ declare namespace sn_ws {
 
         /**
          * Retrieve one entry from the request body as a script object.
+         * 
          * @returns A single entry from the request body.
-         * @example var requestBody = request.body;
-         * var requestEntry = requestBody.nextEntry(); // returns available entry if there is only one entry, or the first entry if there are multiple.
+         * @example
+         *
+         * var requestBody = request.body;
+         * // returns available entry if there is only one entry, or the first entry if there are multiple.
+         * var requestEntry = requestBody.nextEntry();
          * var name = requestEntry.name; // ‘user1’
          * // Calling second time
-         * requestEntry = requestBody.nextEntry(); // returns undefined if there is only one entry, or the second entry if there are multiple.
-         * @example var requestBody = request.body;
-         * while(requestBody.hasNext()){
-         * var entry = requestBody.nextEntry();
+         * // returns undefined if there is only one entry, or the second entry if there are multiple.
+         * requestEntry = requestBody.nextEntry();
+         *
+         * @example
+         *
+         * var requestBody = request.body;
+         * while (requestBody.hasNext()) {
+         *   var entry = requestBody.nextEntry();
          * }
          */
         nextEntry(): any;
